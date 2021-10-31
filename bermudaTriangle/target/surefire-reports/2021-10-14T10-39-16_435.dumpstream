@@ -1,0 +1,6 @@
+# Created at 2021-10-14T10:39:17.602
+Error: Could not find or load main class Perangkat
+
+# Created at 2021-10-14T10:39:17.602
+Caused by: java.lang.ClassNotFoundException: Perangkat
+
