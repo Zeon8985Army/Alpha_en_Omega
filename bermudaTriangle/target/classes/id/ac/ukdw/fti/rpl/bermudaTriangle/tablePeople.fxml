@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_People_Controller">
+   <children>
+      <TableView fx:id="tabelPeople" layoutY="127.0" prefHeight="274.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="personLookup" prefWidth="92.0" text="PersonLookup" />
+          <TableColumn fx:id="displayTitle" prefWidth="88.0" text="displayTitle" />
+            <TableColumn fx:id="gender" prefWidth="60.0" text="gender" />
+            <TableColumn fx:id="birthPlace" prefWidth="69.0" text="birthPlace" />
+            <TableColumn fx:id="deathYear" prefWidth="65.0" text="deathYear" />
+            <TableColumn fx:id="dictText" prefWidth="95.0" text="dictText" />
+            <TableColumn fx:id="verses" prefWidth="68.0" text="verses" />
+            <TableColumn fx:id="birthYear" prefWidth="62.0" text="birthYear" />
+        </columns>
+      </TableView>
+      <Text layoutX="119.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabel People" textAlignment="CENTER" wrappingWidth="362.396484375">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnToVerse" layoutX="28.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnToVerse" text="&lt;Verse" />
+      <Button fx:id="btnToPlaces" layoutX="519.0" layoutY="84.0" mnemonicParsing="false" onAction="#btnToPlaces" text="Places&gt;" />
+   </children>
+</AnchorPane>
