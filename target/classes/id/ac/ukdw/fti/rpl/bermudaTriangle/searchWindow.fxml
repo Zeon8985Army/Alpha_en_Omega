@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="searchAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_Search_Controller">
+   <children>
+      <TextField fx:id="searchInput" layoutX="27.0" layoutY="73.0" prefHeight="33.0" prefWidth="230.0" promptText="People and Place" />
+      <Button fx:id="searchButton" layoutX="274.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="🔍" textAlignment="CENTER">
+         <font>
+            <Font name="Aparajita" size="16.0" />
+         </font>
+      </Button>
+      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="703.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="🏠">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Home" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="🔍">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Search" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="📖">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Verse" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="?">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ListView fx:id="tableSearch" layoutX="26.0" layoutY="130.0" prefHeight="287.0" prefWidth="646.0" />
+      <Button fx:id="detailItem" layoutX="625.0" layoutY="428.0" mnemonicParsing="false" text="Detail" />
+   </children>
+</AnchorPane>
