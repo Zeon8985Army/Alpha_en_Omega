@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="detailAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_DetailPLC_Controller">
+   <children>
+      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="703.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="🏠">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Home" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="🔍">
+            <items>
+              <MenuItem fx:id="BtnGoToSearchPlC" mnemonicParsing="false" onAction="#goToSearchPLC" text="Search" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="📖">
+              <items>
+                <MenuItem fx:id="BtnGoToVersePLC" mnemonicParsing="false" onAction="#goToVersePLC" text="Verse" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="?">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fx:id="imgPlace" fitHeight="228.0" fitWidth="208.0" layoutX="45.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="34.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detail Information ">
+         <font>
+            <Font name="Yu Gothic Regular" size="30.0" />
+         </font>
+      </Text>
+      <Text layoutX="282.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name               :">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="282.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People in here  :">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="282.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verses              :">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+      </Text>
+      <ListView fx:id="peopleHere" layoutX="401.0" layoutY="252.0" prefHeight="100.0" prefWidth="259.0" />
+      <ListView fx:id="versesPlace" layoutX="402.0" layoutY="146.0" prefHeight="88.0" prefWidth="259.0" />
+      <TextArea fx:id="descriptionPlace" editable="false" layoutX="50.0" layoutY="379.0" prefHeight="58.0" prefWidth="611.0" />
+      <Text layoutX="48.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="namePlace" editable="false" layoutX="401.0" layoutY="105.0" prefHeight="25.0" prefWidth="208.0" />
+   </children>
+</AnchorPane>

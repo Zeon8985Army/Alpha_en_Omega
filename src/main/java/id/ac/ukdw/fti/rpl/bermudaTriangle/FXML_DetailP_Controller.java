@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.People;
@@ -18,18 +16,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class FXML_DetailP_Controller implements Initializable {
@@ -41,6 +39,12 @@ public class FXML_DetailP_Controller implements Initializable {
 
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private Menu searchMB;
+    @FXML
+    private MenuItem BtnGoToSearch;
+    @FXML
+    private MenuItem BtnGoToVerse;
 
     @FXML
     private ImageView imgPeople;
@@ -53,7 +57,7 @@ public class FXML_DetailP_Controller implements Initializable {
 
     @FXML
     private TextArea descriptionPeople;
-    
+
     @FXML
     private TextField namePeople;
 
@@ -69,6 +73,25 @@ public class FXML_DetailP_Controller implements Initializable {
 
     }
 
+    // MenuBar Method
+    @FXML
+    void goToSearch(ActionEvent event) throws IOException {
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("searchWindow.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.show();
+    }
+
+    @FXML
+    void goToVerse(ActionEvent event) throws IOException {
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.show();
+    }
+
     public void showName(String name) {
         descriptionPeople.setWrapText(true);
         namePeople.setText(name);
@@ -78,18 +101,19 @@ public class FXML_DetailP_Controller implements Initializable {
 
         for (People people : peoples) {
             if (name == people.getDisplayTitle()) {
-                if (people.getGender() == "") {
+                if (people.getGender() == null) {
                     genderPeople.setText("No Data");
                 } else {
                     genderPeople.setText(people.getGender());
                 }
 
-                if (people.getBirthYear() == "") {
+                if (people.getBirthYear() == null) {
                     birthPeople.setText("No Data");
                 } else {
                     birthPeople.setText(people.getBirthYear());
                 }
 
+                boolean tidakAdaPlace = true;
                 for (Places place : places) {
                     String[] listPeopleHassBenHere = { "" };
                     String[] listPeopleBornHere = { "" };
@@ -125,17 +149,24 @@ public class FXML_DetailP_Controller implements Initializable {
 
                     if (listPeopleHere.contains(people.getPersonLookup())) {
                         locationPeople.getItems().add(place.getDisplayTitle());
+                        tidakAdaPlace = false;
                         break;
                     }
                 }
 
-                if (people.getVerses().contains(",")) {
-                    String[] listVerse = people.getVerses().split(",");
-                    for (String verse : listVerse) {
-                        versePeople.getItems().add(verse);
+                if (tidakAdaPlace) {
+                    locationPeople.getItems().add("No Data");
+                }
+
+                if (people.getVerses() != null) {
+                    if (people.getVerses().contains(",")) {
+                        String[] listVerse = people.getVerses().split(",");
+                        for (String verse : listVerse) {
+                            versePeople.getItems().add(verse);
+                        }
+                    } else {
+                        versePeople.getItems().add(people.getVerses());
                     }
-                } else {
-                    versePeople.getItems().add(people.getVerses());
                 }
 
                 descriptionPeople.setText(people.getDictText());

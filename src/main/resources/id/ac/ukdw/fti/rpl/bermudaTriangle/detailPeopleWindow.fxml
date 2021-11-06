@@ -20,14 +20,14 @@
               <MenuItem mnemonicParsing="false" text="Home" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="🔍">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Search" />
-            </items>
+          <Menu fx:id="BtnGoToSearch" mnemonicParsing="false" text="🔍">
+               <items>
+                  <MenuItem fx:id="BtnGoToSearch" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
+               </items>
           </Menu>
             <Menu mnemonicParsing="false" text="📖">
               <items>
-                <MenuItem mnemonicParsing="false" text="Verse" />
+                <MenuItem fx:id="BtnGoToVerse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="?">
