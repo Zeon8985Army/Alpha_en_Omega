@@ -15,7 +15,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
-        Parent root = FXMLLoader.load(getClass().getResource("tableverse.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("searchWindow.fxml"));
 
         Scene scene = new Scene(root);
 

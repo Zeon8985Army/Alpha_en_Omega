@@ -15,7 +15,7 @@ public class Database {
 
     final private String url = "jdbc:sqlite:vizbible.db";
 
-    final private String querySelect = "SELECT verseID,osisRef,verseText,people,places FROM verses";
+    final private String querySelect = "SELECT osisRef,verseID,book,chapter,verseNum,verseText,people,places FROM verses";
     final private String queryPeople = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses FROM people";
     final private String queryPlace = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude FROM places";
     // query baru
@@ -47,6 +47,12 @@ public class Database {
             ResultSet result = statement.executeQuery(querySelect);
             while (result.next()) {
                 Verse verse = new Verse();
+
+                verse.setOsisRef(result.getString("osisRef"));
+                verse.setBook(result.getString("book"));
+                verse.setChapter(result.getString("chapter"));
+                verse.setVerseNum(result.getString("verseNum"));
+
                 verse.setVerseId(result.getInt("verseID"));
                 verse.setVerse(result.getString("osisRef"));
                 verse.setVerseText(result.getString("verseText"));

@@ -19,7 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
-
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -27,12 +27,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class FXML_DetailPLC_Controller implements Initializable{
     private ObservableList<People> peoples = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
 
+    // untuk ke detail
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    
     @FXML
     private AnchorPane detailAnchor;
 
@@ -57,6 +63,10 @@ public class FXML_DetailPLC_Controller implements Initializable{
 
     @FXML
     private TextField namePlace;
+    @FXML
+    private Button btnDetailVerse;
+    @FXML
+    private Text backLog;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -149,11 +159,34 @@ public class FXML_DetailPLC_Controller implements Initializable{
                     }
                 }
                 
-                descriptionPlace.setText(place.getDictText());
-            } else {
+                if (place.getDictText()==null) {
+                    descriptionPlace.setText("No Data");
+                }else{
+                    descriptionPlace.setText(place.getDictText());
+                }            } else {
                 continue;
             }
         }
     }
 
+    @FXML
+    void detailVerse(ActionEvent event) throws IOException {
+        String selectedVerse = versesPlace.getSelectionModel().getSelectedItem();
+
+        if (selectedVerse!=null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("verseWindow.fxml"));
+            root = loader.load();
+
+            FXML_VerseWindow_Controller verseWindow = loader.getController();
+
+            verseWindow.showDetailVerse(selectedVerse);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }else{
+            backLog.setText("Please Select verse before go to detail verse...");
+        }
+    }
 }
