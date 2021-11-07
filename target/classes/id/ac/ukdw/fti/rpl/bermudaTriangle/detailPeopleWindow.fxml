@@ -17,7 +17,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="🏠">
             <items>
-              <MenuItem mnemonicParsing="false" text="Home" />
+              <MenuItem mnemonicParsing="false" text="Home - Not Ready" />
             </items>
           </Menu>
           <Menu fx:id="BtnGoToSearch" mnemonicParsing="false" text="🔍">
@@ -32,7 +32,7 @@
             </Menu>
           <Menu mnemonicParsing="false" text="?">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="About - Not Ready" />
             </items>
           </Menu>
         </menus>
@@ -79,5 +79,6 @@
       <TextField fx:id="namePeople" editable="false" layoutX="396.0" layoutY="104.0" prefHeight="25.0" prefWidth="208.0" />
       <TextField fx:id="genderPeople" editable="false" layoutX="396.0" layoutY="138.0" prefHeight="25.0" prefWidth="208.0" />
       <TextField fx:id="birthPeople" editable="false" layoutX="396.0" layoutY="170.0" prefHeight="25.0" prefWidth="208.0" />
+      <Text fx:id="backLog" fill="RED" layoutX="64.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
