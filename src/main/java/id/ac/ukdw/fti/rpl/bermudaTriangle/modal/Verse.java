@@ -1,6 +1,11 @@
 package id.ac.ukdw.fti.rpl.bermudaTriangle.modal;
 
 public class Verse {
+    private String osisRef;
+    private String book;
+    private String chapter;
+    private String verseNum;
+
     private int verseId;
     private String verse;
     private String verseText;
@@ -46,4 +51,37 @@ public class Verse {
     public String getPlaces() {
         return this.places;
     }
+
+    public String getOsisRef() {
+        return osisRef;
+    }
+
+    public void setOsisRef(String osisRef) {
+        this.osisRef = osisRef;
+    }
+
+    public String getBook() {
+        return book;
+    }
+
+    public void setBook(String book) {
+        this.book = book;
+    }
+
+    public String getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(String chapter) {
+        this.chapter = chapter;
+    }
+
+    public String getVerseNum() {
+        return verseNum;
+    }
+
+    public void setVerseNum(String verseNum) {
+        this.verseNum = verseNum;
+    }
+    
 }
