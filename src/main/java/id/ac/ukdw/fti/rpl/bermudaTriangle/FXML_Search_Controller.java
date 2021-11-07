@@ -73,7 +73,7 @@ public class FXML_Search_Controller implements Initializable {
 
     @FXML
     private Button detailItem;
-    
+
     @FXML
     private Text backLog;
 

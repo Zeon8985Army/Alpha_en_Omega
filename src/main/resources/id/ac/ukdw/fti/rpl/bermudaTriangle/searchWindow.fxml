@@ -43,7 +43,7 @@
         </menus>
       </MenuBar>
       <ListView fx:id="tableSearchPeople" layoutX="31.0" layoutY="144.0" onMouseClicked="#clickItemPeople" prefHeight="273.0" prefWidth="297.0" />
-      <Button fx:id="detailItem" layoutX="624.0" layoutY="424.0" mnemonicParsing="false" onAction="#detailItem" prefHeight="20.0" prefWidth="48.0" text="Detail" />
+      <Button fx:id="detailItem" layoutX="598.0" layoutY="65.0" mnemonicParsing="false" onAction="#detailItem" prefHeight="33.0" prefWidth="74.0" text="Detail" />
       <ListView fx:id="tableSearchPlaces" layoutX="365.0" layoutY="144.0" onMouseClicked="#clickItemPlaces" prefHeight="273.0" prefWidth="307.0" />
       <Text layoutX="32.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List People :">
          <font>

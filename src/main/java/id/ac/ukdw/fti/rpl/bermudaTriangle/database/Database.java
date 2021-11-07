@@ -47,6 +47,7 @@ public class Database {
             ResultSet result = statement.executeQuery(querySelect);
             while (result.next()) {
                 Verse verse = new Verse();
+
                 verse.setOsisRef(result.getString("osisRef"));
                 verse.setBook(result.getString("book"));
                 verse.setChapter(result.getString("chapter"));

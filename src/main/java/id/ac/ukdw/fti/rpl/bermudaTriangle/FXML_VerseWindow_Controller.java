@@ -5,31 +5,30 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
-import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.People;
-import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Places;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Verse;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -42,26 +41,30 @@ public class FXML_VerseWindow_Controller implements Initializable {
     @FXML
     private AnchorPane searchAnchor;
 
+    // btn MenuBar
     @FXML
     private MenuBar menuBar;
     @FXML
     private MenuItem BtnGoToSearch;
     @FXML
     private MenuItem BtnGoToVerse;
-
     @FXML
-    private Text ayatLengkap;
+    private TextArea textAyat;
+
+    // btn listKItab
     @FXML
     private RadioButton btnNT;
     @FXML
     private RadioButton btnOT;
     @FXML
+    private ListView<String> listKitab;
+    @FXML
     private Button btnSortKitab;
 
     @FXML
-    private TextArea textAyat;
-    @FXML
-    private ListView<String> listKitab;
+    private Text ayatLengkap;
+
+    // btn pasal dan ayat
     @FXML
     private ComboBox<String> listChapter;
     @FXML
@@ -70,8 +73,9 @@ public class FXML_VerseWindow_Controller implements Initializable {
     private Text chapterSelected;
     @FXML
     private Text sectionSelected;
+
     @FXML
-    private Text backLog;
+    private Slider slidder;
 
     @FXML
     void goToSearch(ActionEvent event) throws IOException {
@@ -115,6 +119,8 @@ public class FXML_VerseWindow_Controller implements Initializable {
     // Method untuk select"
     @FXML
     void selectKitab(MouseEvent event) {
+        ArrayList<String> verseInSection = new ArrayList<>();
+
         listChapter.getItems().clear();
         listSection.getItems().clear();
 
@@ -124,8 +130,12 @@ public class FXML_VerseWindow_Controller implements Initializable {
         String selectedKitab = listKitab.getSelectionModel().getSelectedItem();
 
         ArrayList<String> listChapterArray = new ArrayList<>();
+        ArrayList<String> listSectionArray = new ArrayList<>();
 
         for (Verse verse : verses) {
+            if (verse.getChapter().equals(selectedKitab + ".1")) {
+                verseInSection.add(verse.getVerse() + "\n" + verse.getVerseText() + "\n\n");
+            }
             if (listChapterArray.contains(verse.getChapter())) {
                 continue;
             }
@@ -133,9 +143,22 @@ public class FXML_VerseWindow_Controller implements Initializable {
                 listChapter.getItems().add(verse.getChapter());
                 listChapterArray.add(verse.getChapter());
             }
+
         }
-        chapterSelected.setText(selectedKitab + ".1");
-        ayatLengkap.setText(selectedKitab + "..." + "...");
+
+        for (Verse verse : verses) {
+            if (listSectionArray.contains(verse.getVerseNum())) {
+                continue;
+            }
+            if (verse.getChapter().equals(selectedKitab + ".1")) {
+                listSection.getItems().add(verse.getVerseNum());
+                listSectionArray.add(verse.getVerseNum());
+            }
+        }
+        listChapter.getSelectionModel().select(selectedKitab + ".1");
+        ayatLengkap.setText(selectedKitab + ".1" + ".1");
+
+        textAyat.setText(verseInSection.toString().replace("[", "").replace("]", "").replace(",", ""));
     }
 
     @FXML
@@ -146,6 +169,7 @@ public class FXML_VerseWindow_Controller implements Initializable {
 
         sectionSelected.setText("1");
         ArrayList<String> listSectionArray = new ArrayList<>();
+        ArrayList<String> verseInSection = new ArrayList<>();
 
         for (Verse verse : verses) {
             if (listSectionArray.contains(verse.getVerseNum())) {
@@ -154,10 +178,12 @@ public class FXML_VerseWindow_Controller implements Initializable {
             if (verse.getChapter().equals(selectedChapter)) {
                 listSection.getItems().add(verse.getVerseNum());
                 listSectionArray.add(verse.getVerseNum());
+                verseInSection.add(verse.getVerse() + "\n" + verse.getVerseText() + "\n\n");
             }
         }
         ayatLengkap.setText(selectedChapter + "...");
 
+        textAyat.setText(verseInSection.toString().replace("[", "").replace("]", "").replace(",", ""));
     }
 
     @FXML
@@ -166,13 +192,17 @@ public class FXML_VerseWindow_Controller implements Initializable {
         String selectedChapter = listChapter.getSelectionModel().getSelectedItem();
         String selectedSection = listSection.getSelectionModel().getSelectedItem();
 
-        for (Verse verse : verses) {
-            if (verse.getVerse().equals(selectedChapter + "." + selectedSection)) {
-                textAyat.setText(verse.getVerseText());
-                break;
+        if (selectedChapter == null && selectedSection == null) {
+            ayatLengkap.setText("Please choose the verse...");
+        } else {
+            ayatLengkap.setText(selectedChapter + "." + selectedSection);
+            for (Verse verse : verses) {
+                if (verse.getVerse().equals(selectedChapter + "." + selectedSection)) {
+                    textAyat.setText(verse.getVerseText());
+                    break;
+                }
             }
         }
-        ayatLengkap.setText(selectedChapter + "." + selectedSection);
     }
 
     // method kitab"
@@ -231,4 +261,52 @@ public class FXML_VerseWindow_Controller implements Initializable {
         }
     }
 
+    @FXML
+    void checkSlider(MouseEvent event) {
+        textAyat.setStyle("-fx-font-size: " + slidder.getValue());
+    }
+
+    public void showDetailVerse(String ayat) {
+        String[] arrayArat = ayat.split("\\.");
+        listKitab.getSelectionModel().select(arrayArat[0]);
+
+        chapterSelected.setText("");
+        sectionSelected.setText("");
+
+        ArrayList<String> listChapterArray = new ArrayList<>();
+
+        for (Verse verse : verses) {
+            if (listChapterArray.contains(verse.getChapter())) {
+                continue;
+            }
+            if (verse.getBook().equals(arrayArat[0])) {
+                listChapter.getItems().add(verse.getChapter());
+                listChapterArray.add(verse.getChapter());
+            }
+        }
+
+        listChapter.getSelectionModel().select(arrayArat[0] + "." + arrayArat[1]);
+
+        ArrayList<String> listSectionArray = new ArrayList<>();
+
+        for (Verse verse : verses) {
+            if (listSectionArray.contains(verse.getVerseNum())) {
+                continue;
+            }
+            if (verse.getChapter().equals(arrayArat[0] + "." + arrayArat[1])) {
+                listSection.getItems().add(verse.getVerseNum());
+                listSectionArray.add(verse.getVerseNum());
+            }
+        }
+
+        listSection.getSelectionModel().select(arrayArat[2]);
+        ayatLengkap.setText(arrayArat[0] + "." + arrayArat[1] + "." + arrayArat[2]);
+
+        for (Verse verse : verses) {
+            if (verse.getVerse().equals(ayat)) {
+                textAyat.setText(verse.getVerseText());
+                break;
+            }
+        }
+    }
 }
