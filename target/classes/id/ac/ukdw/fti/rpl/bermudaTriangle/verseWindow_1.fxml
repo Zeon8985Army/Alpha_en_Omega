@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="searchAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_VerseWindow_Controller">
+   <children>
+      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="703.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="🏠">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Home - Not Ready" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="🔍">
+            <items>
+              <MenuItem fx:id="BtnGoToSearch" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="📖">
+              <items>
+                <MenuItem fx:id="BtnGoToVerse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="?">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About - Not Ready" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Separator layoutX="169.0" layoutY="84.0" prefHeight="0.0" prefWidth="534.0" />
+      <Separator layoutX="168.0" layoutY="27.0" orientation="VERTICAL" prefHeight="437.0" prefWidth="6.0" />
+      <TextArea fx:id="textAyat" editable="false" layoutX="169.0" layoutY="112.0" prefHeight="355.0" prefWidth="534.0" />
+      <RadioButton fx:id="btnNT" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onAction="#ntKitabDisplay" text="NT" />
+      <RadioButton fx:id="btnOT" layoutX="15.0" layoutY="110.0" mnemonicParsing="false" onAction="#otKitabDisplay" text="OT" />
+      <ListView fx:id="listKitab" layoutX="12.0" layoutY="134.0" onMouseClicked="#selectKitab" prefHeight="318.0" prefWidth="145.0" />
+      <Button fx:id="btnSortKitab" layoutX="122.0" layoutY="106.0" mnemonicParsing="false" onAction="#sortKitab" prefHeight="25.0" prefWidth="28.0" text="⇵" />
+      <Text fx:id="ayatLengkap" layoutX="181.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose the verse..." />
+      <Text layoutX="182.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chapter :" />
+      <Text layoutX="360.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Section :" />
+      <ImageView fitHeight="59.0" fitWidth="104.0" layoutX="14.0" layoutY="36.0">
+         <image>
+            <Image url="@Alpha_omega.png" />
+         </image>
+      </ImageView>
+      <ComboBox fx:id="listChapter" layoutX="238.0" layoutY="46.0" onAction="#selectChapter" prefHeight="25.0" prefWidth="104.0" />
+      <ComboBox fx:id="listSection" layoutX="413.0" layoutY="47.0" onAction="#selectSection" prefHeight="25.0" prefWidth="64.0" />
+      <Text fx:id="chapterSelected" disable="true" layoutX="247.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text=". . ." />
+      <Text fx:id="sectionSelected" disable="true" layoutX="421.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text=". . ." />
+      <Slider fx:id="slidder" layoutX="520.0" layoutY="92.0" max="25.0" min="12.0" onMouseDragged="#checkSlider" />
+      <Text layoutX="660.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100%" />
+      <Text layoutX="491.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50%" />
+   </children>
+</AnchorPane>
