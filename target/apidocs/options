@@ -1,0 +1,30 @@
+--class-path
+'C:/Users/W8/.m2/repository/org/openjfx/javafx-base/16/javafx-base-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-graphics/16/javafx-graphics-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-swing/16/javafx-swing-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-swing/16/javafx-swing-16-win.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-web/16/javafx-web-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-web/16/javafx-web-16-win.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-controls/16/javafx-controls-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-media/16/javafx-media-16.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-media/16/javafx-media-16-win.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-fxml/16/javafx-fxml-16.jar;C:/Users/W8/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.3/jakarta.xml.bind-api-2.3.3.jar;C:/Users/W8/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.2/jakarta.activation-api-1.2.2.jar;C:/Users/W8/.m2/repository/com/sun/xml/bind/jaxb-impl/2.3.3/jaxb-impl-2.3.3.jar;C:/Users/W8/.m2/repository/org/slf4j/slf4j-api/1.7.29/slf4j-api-1.7.29.jar;C:/Users/W8/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar;C:/Users/W8/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar'
+--module-path
+'C:/Users/W8/.m2/repository/org/openjfx/javafx-controls/16/javafx-controls-16-win.jar;D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/target/bermudaTriangle-11.0.2.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-graphics/16/javafx-graphics-16-win.jar;C:/Users/W8/.m2/repository/org/xerial/sqlite-jdbc/3.32.3.2/sqlite-jdbc-3.32.3.2.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-base/16/javafx-base-16-win.jar;C:/Users/W8/.m2/repository/org/openjfx/javafx-fxml/16/javafx-fxml-16-win.jar'
+--patch-module
+bermudaTriangle='D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/src/main/java;D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/target/generated-sources/annotations'
+-encoding
+'UTF-8'
+-protected
+--release
+11
+--module-source-path
+'D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/target/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'bermudaTriangle 11.0.2 API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'D:/Kuliah_SMT_5/Tutorial Perangkat Lunak/Proyek/GitHub/Versi_4/Alpha_en_Omega/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'bermudaTriangle 11.0.2 API'

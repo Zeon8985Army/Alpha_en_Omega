@@ -10,8 +10,7 @@ import javafx.stage.Stage;
  * Hello world!
  *
  */
-public class App extends Application
-{
+public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
@@ -24,8 +23,7 @@ public class App extends Application
         stage.show();
     }
 
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }
