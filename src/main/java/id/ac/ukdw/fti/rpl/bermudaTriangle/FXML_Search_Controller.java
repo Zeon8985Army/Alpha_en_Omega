@@ -180,8 +180,8 @@ public class FXML_Search_Controller implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPlaceWindow.fxml"));
                 root = loader.load();
 
-                FXML_DetailPLC_Controller detailPlace = loader.getController();
-                detailPlace.showDetailPlace(namePlace);
+                FXML_DetailPLC_Controller detailPLC = loader.getController();
+                detailPLC.showDetailPlace(namePlace);
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
