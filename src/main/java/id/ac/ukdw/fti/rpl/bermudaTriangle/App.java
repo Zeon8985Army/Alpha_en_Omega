@@ -10,12 +10,11 @@ import javafx.stage.Stage;
  * Hello world!
  *
  */
-public class App extends Application
-{
+public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
-        Parent root = FXMLLoader.load(getClass().getResource("searchWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -24,8 +23,7 @@ public class App extends Application
         stage.show();
     }
 
-    public static void main( String[] args )
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }

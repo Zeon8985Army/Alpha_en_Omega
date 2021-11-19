@@ -177,11 +177,11 @@ public class FXML_Search_Controller implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             } else if (placesList.contains(namePlace)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPlaceWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
-                FXML_DetailPLC_Controller detailPlace = loader.getController();
-                detailPlace.showDetailPlace(namePlace);
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(namePlace,"place");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
