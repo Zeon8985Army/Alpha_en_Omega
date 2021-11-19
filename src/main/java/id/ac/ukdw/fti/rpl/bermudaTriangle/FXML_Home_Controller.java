@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 // untuk map
 import id.ac.ukdw.fti.rpl.bermudaTriangle.GoogleMapView;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.MapComponentInitializedListener;
+import id.ac.ukdw.fti.rpl.bermudaTriangle.javascript.event.MouseEventHandler;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.javascript.object.GoogleMap;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.javascript.object.InfoWindow;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.javascript.object.InfoWindowOptions;
@@ -99,11 +100,13 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         description.setWrapText(true);
         places = Database.instance.getAllPlace();
         peoples = Database.instance.getAllPeople();
+        double latitude=0;
+        double longtitude=0;
+        ArrayList<String> listVerseInView = new ArrayList<>();
+        System.out.println(typeObject.equals("place"));
 
         if (typeObject.equals("place")) {
-            // Database, getValue from Bethlehem
-            double latitude=0;
-            double longtitude=0;
+            // Database, getValue from Bethlehem    
             String namePlace="No Object";
             String peopleInHere="No Data";
             String descriptionTextDict="No Data";
@@ -154,7 +157,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
 
                     StringBuilder sb = new StringBuilder();
                     for (String name : listPeopleHereLookup){
-                        sb.append(name);
+                        for (People people : peoples) {
+                            if (people.getPersonLookup().equals(name)){
+                                sb.append(people.getDisplayTitle());
+                                break;
+                            }
+                        }
                         if (name.equals("")){
                             break;
                         }
@@ -169,7 +177,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     if (place.getVerses() != null) {
                         if (place.getVerses().contains(",")) {
                             String[] listVerseTampung = place.getVerses().split(",");
-                            listVerse.getItems().addAll(listVerseTampung);
+                            for (String verse : listVerseTampung) {
+                                if (!listVerseInView.contains(verse)) {
+                                    listVerse.getItems().add(verse);
+                                }
+                                listVerseInView.add(verse);
+                            }
                         } else {
                             listVerse.getItems().add(place.getVerses());
                         }
@@ -218,9 +231,158 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             // Verse --ada pada bagian database
         }else{
             String descriptionTextDict="No Data";
-            
-           
+            ArrayList<ArrayList<String>> listLatLongName = new ArrayList<>();
 
+            // Database People
+            for (People people : peoples) {
+                if (people.getDisplayTitle().equals(nameObject)) {
+                    if (people.getDictText()!=null) {
+                        descriptionTextDict = people.getDictText();
+                    }
+                    if (people.getGender() != null) {
+                        descriptionTextDict = descriptionTextDict +
+                                "\n\nGender : "+(people.getGender());
+                    }else{
+                        descriptionTextDict = descriptionTextDict +
+                                "\n\nGender : "+"No Data";
+                    }
+                    if (people.getBirthYear() != null) {
+                        descriptionTextDict = descriptionTextDict +
+                                "\n\nBirth Year : "+(people.getBirthYear());
+                    }else{
+                        descriptionTextDict = descriptionTextDict +
+                                "\n\nBirth Year : "+"No Data";
+                    }
+                        
+                    for (Places place : places) {
+                        String[] listPeopleHassBenHere = { "" };
+                        String[] listPeopleBornHere = { "" };
+                        String[] listPeopleDiedHere = { "" };
+    
+                        if (place.getHasBeenHere() != null) {
+                            if (place.getHasBeenHere().contains(",")) {
+                                listPeopleHassBenHere = place.getHasBeenHere().split(",");
+                            } else {
+                                listPeopleHassBenHere = place.getHasBeenHere().split(" ");
+                            }
+                        }
+    
+                        if (place.getPeopleBorn() != null) {
+                            if (place.getPeopleBorn().contains(",")) {
+                                listPeopleBornHere = place.getPeopleBorn().split(",");
+                            } else {
+                                listPeopleBornHere = place.getPeopleBorn().split(" ");
+                            }
+                        }
+    
+                        if (place.getPeopleDied() != null) {
+                            if (place.getPeopleDied().contains(",")) {
+                                listPeopleDiedHere = place.getPeopleDied().split(",");
+                            } else {
+                                listPeopleDiedHere = place.getPeopleDied().split(" ");
+                            }
+                        }
+    
+                        ArrayList<String> listPeopleHere = new ArrayList<>(Arrays.asList(listPeopleHassBenHere));
+                        listPeopleHere.addAll(Arrays.asList(listPeopleBornHere));
+                        listPeopleHere.addAll(Arrays.asList(listPeopleDiedHere));
+    
+                        if (listPeopleHere.contains(people.getPersonLookup())) {
+                            // mencegah tidak ada lokasi sama dimasukan 2 kali
+                            for (ArrayList<String> ArrayDetail : listLatLongName) {
+                                if (ArrayDetail.get(2).equals(place.getDisplayTitle())) {
+                                    continue;
+                                }
+                            }
+                            ArrayList<String> listDetail = new ArrayList<>();
+                            listDetail.add(place.getLatitude());
+                            listDetail.add(place.getLongitude());
+                            listDetail.add(place.getDisplayTitle());
+
+                            listLatLongName.add(listDetail);
+                        }
+                    }
+
+    
+                    if (people.getVerses() != null) {
+                        if (people.getVerses().contains(",")) {
+                            String[] listVerseTampung = people.getVerses().split(",");
+                            for (String verse : listVerseTampung) {
+                                if (!listVerseInView.contains(verse)) {
+                                    listVerse.getItems().add(verse);
+                                }
+                                listVerseInView.add(verse);
+                            }
+                        } else {
+                            listVerse.getItems().add(people.getVerses());
+                        }
+                    }
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            // Map
+            ArrayList<LatLong> latLongArr = new ArrayList<>();
+            ArrayList<Marker> markerArr = new ArrayList<>();
+            ArrayList<InfoWindow> infoWindowArr = new ArrayList<>();
+            Integer lenghtPlace = listLatLongName.size();
+
+            MapOptions mapOptions = new MapOptions();
+            mapOptions.center(new LatLong(latitude, longtitude))
+                    .mapType(MapTypeIdEnum.TERRAIN)
+                    .overviewMapControl(false)
+                    .panControl(false)
+                    .rotateControl(false)
+                    .scaleControl(false)
+                    .streetViewControl(false)
+                    .zoomControl(false)
+                    .zoom(5);
+            map = mapID.createMap(mapOptions);
+
+            // Multiple Marked position
+            for (ArrayList<String> ArrayDetail : listLatLongName) {
+                latitude=Double.parseDouble(ArrayDetail.get(0));
+                longtitude=Double.parseDouble(ArrayDetail.get(1));
+
+                latLongArr.add(new LatLong(latitude,longtitude));
+                
+            }
+
+            Integer pointer =0;
+            for ( LatLong arrOjb : latLongArr) {
+                String namePlace = listLatLongName.get(pointer).get(2);
+                // name Place
+
+                //Add markers to the map
+                MarkerOptions markerOptions1 = new MarkerOptions();
+                markerOptions1.position(arrOjb).label(namePlace);
+
+                markerArr.add(new Marker(markerOptions1));
+                pointer = pointer+1;
+            }
+
+            Integer pointer2 =0;
+            for (Marker marker : markerArr) {
+                map.addMarker(marker);
+
+                if (pointer2 == lenghtPlace-1) {
+                    InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                    String namePlace = listLatLongName.get(pointer2).get(2);
+
+                    infoWindowOptions.content("<span>"+namePlace+"</span>");
+                    InfoWindow window = new InfoWindow(infoWindowOptions);
+                    window.open(map, marker);    
+                }
+
+                pointer2 = pointer2+1;
+            }
+            
+            // Object name
+            objectName.setText(nameObject);
+
+            // description
+            description.setText(descriptionTextDict);
         }    
     }
 

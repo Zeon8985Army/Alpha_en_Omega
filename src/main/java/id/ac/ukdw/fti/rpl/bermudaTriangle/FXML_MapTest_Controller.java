@@ -16,78 +16,79 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-public class FXML_MapTest_Controller implements Initializable, MapComponentInitializedListener{
+public class FXML_MapTest_Controller implements Initializable, MapComponentInitializedListener {
     @FXML
     private Button button;
-    
+
     @FXML
     private GoogleMapView mapView;
-    
+
     private GoogleMap map;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInitializedListener(this);
-    }    
+    }
 
     @Override
     public void mapInitialized() {
-           LatLong joeSmithLocation = new LatLong(47.6197, -122.3231);
+        LatLong joeSmithLocation = new LatLong(47.6197, -122.3231);
         LatLong joshAndersonLocation = new LatLong(47.6297, -122.3431);
         LatLong bobUnderwoodLocation = new LatLong(47.6397, -122.3031);
         LatLong tomChoiceLocation = new LatLong(47.6497, -122.3325);
         LatLong fredWilkieLocation = new LatLong(47.6597, -122.3357);
-        
-        
-        //Set the initial properties of the map.
+
+        // Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
-        
-        mapOptions.center(new LatLong(47.6097, -122.3331))
-                .mapType(MapTypeIdEnum.ROADMAP)
-                .overviewMapControl(false)
-                .panControl(false)
-                .rotateControl(false)
-                .scaleControl(false)
-                .streetViewControl(false)
-                .zoomControl(false)
-                .zoom(12);
-                   
+
+        mapOptions.center(new LatLong(47.6097, -122.3331)).mapType(MapTypeIdEnum.ROADMAP).overviewMapControl(true)
+                .panControl(false).rotateControl(false).scaleControl(false).streetViewControl(false).zoomControl(false)
+                .zoom(3).clickableIcons(false);
+
         map = mapView.createMap(mapOptions);
 
-        //Add markers to the map
+        // Add markers to the map
         MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(joeSmithLocation);
-        
+        markerOptions1
+            .position(joeSmithLocation)
+            .label("Label 1");
+
         MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(joshAndersonLocation);
-        
+        markerOptions2
+            .position(joshAndersonLocation)
+            .label("Label 2");
+
         MarkerOptions markerOptions3 = new MarkerOptions();
         markerOptions3.position(bobUnderwoodLocation);
-        
+
         MarkerOptions markerOptions4 = new MarkerOptions();
         markerOptions4.position(tomChoiceLocation);
-        
+
         MarkerOptions markerOptions5 = new MarkerOptions();
         markerOptions5.position(fredWilkieLocation);
-        
+
         Marker joeSmithMarker = new Marker(markerOptions1);
         Marker joshAndersonMarker = new Marker(markerOptions2);
         Marker bobUnderwoodMarker = new Marker(markerOptions3);
-        Marker tomChoiceMarker= new Marker(markerOptions4);
+        Marker tomChoiceMarker = new Marker(markerOptions4);
         Marker fredWilkieMarker = new Marker(markerOptions5);
-        
-        map.addMarker( joeSmithMarker );
-        map.addMarker( joshAndersonMarker );
-        map.addMarker( bobUnderwoodMarker );
-        map.addMarker( tomChoiceMarker );
-        map.addMarker( fredWilkieMarker );
-        
+
+
+        map.addMarker(joeSmithMarker);
+        map.addMarker(joshAndersonMarker);
+        map.addMarker(bobUnderwoodMarker);
+        map.addMarker(tomChoiceMarker);
+        map.addMarker(fredWilkieMarker);
+
         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-        infoWindowOptions.content("<h2>Fred Wilkie</h2>"
-                                + "Current Location: Safeway<br>"
-                                + "ETA: 45 minutes" );
+        infoWindowOptions.content("<h2>Fred Wilkie</h2>" + "Current Location: Safeway<br>" + "ETA: 45 minutes");
+
+        InfoWindowOptions infoWindowOptions2 = new InfoWindowOptions();
+        infoWindowOptions2.content("<h2>Fred Wilkie</h2>" + "Current Location: Safeway<br>" + "ETA: 95 minutes");
 
         InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+
         fredWilkeInfoWindow.open(map, fredWilkieMarker);
+        
     }
 }

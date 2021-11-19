@@ -23,12 +23,12 @@
               <menus>
                 <Menu mnemonicParsing="false" text="🏠">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Home - Not Ready" />
+                    <MenuItem fx:id="dashboard" mnemonicParsing="false" onAction="#goToDashboard" text="Dashboard" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="🔍">
                   <items>
-                    <MenuItem fx:id="BtnGoToSearch" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
+                    <MenuItem fx:id="BtnGoToSearch" disable="true" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="📖">

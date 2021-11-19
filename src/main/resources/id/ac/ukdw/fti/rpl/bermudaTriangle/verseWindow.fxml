@@ -28,7 +28,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="🏠">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Home - Not Ready" />
+                    <MenuItem fx:id="dashboard" mnemonicParsing="false" onAction="#goToDashboard" text="Dashboard" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="🔍">
@@ -38,7 +38,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="📖">
                   <items>
-                    <MenuItem fx:id="Verse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
+                    <MenuItem fx:id="Verse" disable="true" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="?">

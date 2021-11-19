@@ -160,7 +160,6 @@ public class FXML_DetailP_Controller implements Initializable {
                     if (listPeopleHere.contains(people.getPersonLookup())) {
                         locationPeople.getItems().add(place.getDisplayTitle());
                         tidakAdaPlace = false;
-                        break;
                     }
                 }
 

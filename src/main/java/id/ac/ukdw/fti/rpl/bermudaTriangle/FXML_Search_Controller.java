@@ -61,6 +61,8 @@ public class FXML_Search_Controller implements Initializable {
     @FXML
     private MenuBar menuBar;
     @FXML
+    private MenuItem dashboard;
+    @FXML
     private MenuItem BtnGoToSearch;
     @FXML
     private MenuItem BtnGoToVerse;
@@ -113,10 +115,17 @@ public class FXML_Search_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.show();
     }
-
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.show();
+    }
+    @FXML
+    void goToDashboard(ActionEvent event) throws IOException{
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
@@ -166,11 +175,11 @@ public class FXML_Search_Controller implements Initializable {
 
         if (namePeople != null || namePlace != null) {
             if (peopleList.contains(namePeople)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPeopleWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
-                FXML_DetailP_Controller detailPeople = loader.getController();
-                detailPeople.showName(namePeople);
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(namePeople,"people");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);

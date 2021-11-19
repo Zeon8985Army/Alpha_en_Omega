@@ -85,7 +85,6 @@ public class FXML_VerseWindow_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.show();
     }
-
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
@@ -94,7 +93,15 @@ public class FXML_VerseWindow_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.show();
     }
-
+    @FXML
+    void goToDashboard(ActionEvent event) throws IOException{
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.show();
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Group
