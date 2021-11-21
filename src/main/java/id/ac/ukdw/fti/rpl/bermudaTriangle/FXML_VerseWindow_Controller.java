@@ -1,12 +1,16 @@
 package id.ac.ukdw.fti.rpl.bermudaTriangle;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Verse;
@@ -18,10 +22,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -32,9 +38,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class FXML_VerseWindow_Controller implements Initializable {
+public class FXML_VerseWindow_Controller extends TimerTask implements Initializable {
     private ObservableList<Verse> verses = FXCollections.observableArrayList();
     private ArrayList<String> listKitabArrayAll = new ArrayList<>();
 
@@ -45,9 +52,15 @@ public class FXML_VerseWindow_Controller implements Initializable {
     @FXML
     private MenuBar menuBar;
     @FXML
+    private MenuItem dashboard;
+    @FXML
     private MenuItem BtnGoToSearch;
     @FXML
     private MenuItem BtnGoToVerse;
+    @FXML
+    private MenuItem internetStatus;
+    @FXML
+    private Label labelInternetStatus;
     @FXML
     private TextArea textAyat;
 
@@ -77,6 +90,9 @@ public class FXML_VerseWindow_Controller implements Initializable {
     @FXML
     private Slider slidder;
 
+    // timer
+    Timer timer;
+
     @FXML
     void goToSearch(ActionEvent event) throws IOException {
         Parent searchWindow = FXMLLoader.load(getClass().getResource("searchWindow.fxml"));
@@ -88,10 +104,34 @@ public class FXML_VerseWindow_Controller implements Initializable {
 
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
+        app_stage.setScene(searchPage);
+        app_stage.setX(bounds.getMinX());
+        app_stage.setY(bounds.getMinY());
+        app_stage.setWidth(bounds.getWidth());
+        app_stage.setHeight(bounds.getHeight());
+        app_stage.show();
+    }
+
+    @FXML
+    void goToDashboard(ActionEvent event) throws IOException {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.setX(bounds.getMinX());
+        app_stage.setY(bounds.getMinY());
+        app_stage.setWidth(bounds.getWidth());
+        app_stage.setHeight(bounds.getHeight());
         app_stage.show();
     }
 
@@ -114,6 +154,19 @@ public class FXML_VerseWindow_Controller implements Initializable {
             }
         }
         listKitabArrayAll = listKitabArray;
+        if (checkInternet()) {
+            BtnGoToSearch.setDisable(false);
+            dashboard.setDisable(false);
+            onlineMethod();
+        } else {
+            BtnGoToSearch.setDisable(true);
+            dashboard.setDisable(true);
+            offlineMethod();
+        }
+
+        // check Internet dinamic gagal
+        // Timer timer = new Timer(true);
+        // timer.schedule(new FXML_VerseWindow_Controller(), 0, 1000);
     }
 
     // Method untuk select"
@@ -308,5 +361,42 @@ public class FXML_VerseWindow_Controller implements Initializable {
                 break;
             }
         }
+    }
+
+    // Check internet is connect
+    public static boolean checkInternet() {
+        try {
+            URL url = new URL("http://www.google.com");
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    // looping method untuk pengecekan internet dengan timer yang ada di Main gagal
+    @Override
+    public void run() {
+        // System.out.println(checkInternet());
+        // // TODO Auto-generated method stub
+        // if (!checkInternet()) {
+        // onlineMethod();
+        // }else{
+        // System.out.println("Test 2");
+        // offlineMethod();
+        // }
+    }
+
+    private void onlineMethod() {
+        labelInternetStatus.setText("⚫ Online");
+        labelInternetStatus.setStyle("-fx-text-fill: green;");
+    }
+
+    private void offlineMethod() {
+        labelInternetStatus.setText("⚫ Offline");
+        labelInternetStatus.setStyle("-fx-text-fill: red;");
     }
 }

@@ -1,64 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="searchAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_Search_Controller">
-   <children>
-      <TextField fx:id="searchInput" layoutX="29.0" layoutY="65.0" onKeyPressed="#enterSearh" prefHeight="33.0" prefWidth="230.0" promptText="People or Place" />
-      <Button fx:id="searchButton" layoutX="276.0" layoutY="65.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="48.0" text="🔍" textAlignment="CENTER">
-         <font>
-            <Font name="Aparajita" size="16.0" />
-         </font>
-      </Button>
-      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="25.0" prefWidth="703.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="🏠">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Home - Not Ready" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="🔍">
-            <items>
-              <MenuItem fx:id="BtnGoToSearch" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="📖">
-              <items>
-                <MenuItem fx:id="BtnGoToVerse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="?">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About - Not Ready" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <ListView fx:id="tableSearchPeople" layoutX="31.0" layoutY="144.0" onMouseClicked="#clickItemPeople" prefHeight="273.0" prefWidth="297.0" />
-      <Button fx:id="detailItem" layoutX="598.0" layoutY="65.0" mnemonicParsing="false" onAction="#detailItem" prefHeight="33.0" prefWidth="74.0" text="Detail" />
-      <ListView fx:id="tableSearchPlaces" layoutX="365.0" layoutY="144.0" onMouseClicked="#clickItemPlaces" prefHeight="273.0" prefWidth="307.0" />
-      <Text layoutX="32.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List People :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="365.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List Places :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text fx:id="backLog" fill="RED" layoutX="32.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font name="Yu Gothic Regular" size="12.0" />
-         </font>
-      </Text>
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_Search_Controller">
+   <top>
+      <BorderPane prefHeight="53.0" prefWidth="601.0" BorderPane.alignment="CENTER">
+         <top>
+            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="🏠">
+                  <items>
+                    <MenuItem fx:id="dashboard" mnemonicParsing="false" onAction="#goToDashboard" text="Dashboard" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="🔍">
+                  <items>
+                    <MenuItem fx:id="BtnGoToSearch" disable="true" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="📖">
+                  <items>
+                    <MenuItem fx:id="Verse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="?">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="About - Not Ready" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <Label text="⚫ Online" textFill="#009e08">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </graphic>
+                  </Menu>
+              </menus>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </MenuBar>
+         </top>
+         <bottom>
+            <BorderPane prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <top>
+                  <AnchorPane prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <AnchorPane prefHeight="35.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <BorderPane prefHeight="15.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <right>
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="46.0" text="🔍" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </right>
+                     <center>
+                        <BorderPane prefHeight="28.0" prefWidth="285.0" BorderPane.alignment="CENTER">
+                           <right>
+                              <AnchorPane prefHeight="35.0" prefWidth="29.0" BorderPane.alignment="CENTER" />
+                           </right>
+                           <center>
+                              <TextField fx:id="searchInput" onKeyPressed="#enterSearh" prefHeight="37.0" prefWidth="148.0" promptText="People or Place" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="Yu Gothic Regular" size="15.0" />
+                                 </font>
+                              </TextField>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+               </center>
+               <right>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </right>
+            </BorderPane>
+         </bottom>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="334.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+         <top>
+            <BorderPane prefHeight="59.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List People :" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="-30.0" left="50.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="Yu Gothic Regular" size="15.0" />
+                     </font>
+                  </Text>
+               </left>
+               <center>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List Places :" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="15.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="-30.0" right="13.0" />
+                     </BorderPane.margin>
+                  </Text>
+               </center></BorderPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="278.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <AnchorPane prefHeight="289.0" prefWidth="39.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="303.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="24.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="293.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ListView fx:id="tableSearchPeople" onMouseClicked="#clickItemPeople" prefHeight="200.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ListView>
+                  <ListView fx:id="tableSearchPlaces" onMouseClicked="#clickItemPlaces" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ListView>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="68.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+         <left>
+            <AnchorPane prefHeight="56.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <AnchorPane prefHeight="56.0" prefWidth="40.0" BorderPane.alignment="CENTER" />
+         </right>
+         <top>
+            <AnchorPane prefHeight="13.0" prefWidth="703.0" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="14.0" prefWidth="703.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <BorderPane prefHeight="55.0" prefWidth="619.0" styleClass="my-button" stylesheets="@../../../../../../CSS/anchorDetail.css" BorderPane.alignment="CENTER">
+               <right>
+                  <Button fx:id="detailItem" mnemonicParsing="false" onAction="#detailItem" text="Detail" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="10.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </right>
+               <left>
+                  <Text fx:id="backLog" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                  </Text>
+               </left>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </bottom>
+</BorderPane>

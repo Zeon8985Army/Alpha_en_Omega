@@ -73,5 +73,6 @@ public class FXML_Verse_Controller implements Initializable {
         app_stage.setScene(peoplePage);
         app_stage.show();
     }
-
+    
+    
 }

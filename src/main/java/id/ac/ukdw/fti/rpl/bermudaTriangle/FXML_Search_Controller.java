@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class FXML_Search_Controller implements Initializable {
@@ -60,6 +62,8 @@ public class FXML_Search_Controller implements Initializable {
 
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private MenuItem dashboard;
     @FXML
     private MenuItem BtnGoToSearch;
     @FXML
@@ -113,13 +117,34 @@ public class FXML_Search_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.show();
     }
-
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
+        app_stage.setX(bounds.getMinX());
+        app_stage.setY(bounds.getMinY());
+        app_stage.setWidth(bounds.getWidth());
+        app_stage.setHeight(bounds.getHeight());
+        app_stage.show();
+    }
+    @FXML
+    void goToDashboard(ActionEvent event) throws IOException{
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        
+        Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
+        Scene searchPage = new Scene(searchWindow);
+        Stage app_stage = (Stage) menuBar.getScene().getWindow();
+        app_stage.setScene(searchPage);
+        app_stage.setX(bounds.getMinX());
+        app_stage.setY(bounds.getMinY());
+        app_stage.setWidth(bounds.getWidth());
+        app_stage.setHeight(bounds.getHeight());
         app_stage.show();
     }
 
@@ -166,22 +191,22 @@ public class FXML_Search_Controller implements Initializable {
 
         if (namePeople != null || namePlace != null) {
             if (peopleList.contains(namePeople)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPeopleWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
-                FXML_DetailP_Controller detailPeople = loader.getController();
-                detailPeople.showName(namePeople);
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(namePeople,"people");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } else if (placesList.contains(namePlace)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPlaceWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
-                FXML_DetailPLC_Controller detailPlace = loader.getController();
-                detailPlace.showDetailPlace(namePlace);
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(namePlace,"place");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
