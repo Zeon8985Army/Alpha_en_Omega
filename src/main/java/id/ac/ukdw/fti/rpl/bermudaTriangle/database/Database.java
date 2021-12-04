@@ -19,6 +19,8 @@ public class Database {
     final private String queryPeople = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses FROM people";
     final private String queryPlace = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude FROM places";
     // query baru
+    final private String queryPeopleTop = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses,verseCount FROM people ORDER BY verseCount DESC LIMIT 10";
+
     // ... sesuai pembagian WBS
 
     private ObservableList<Verse> verses = FXCollections.observableArrayList();
@@ -114,5 +116,31 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return places;
+    }
+
+    // top 10 verseCountPlace
+    public ObservableList<People> getAllPeopleTopVerseCount() {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(queryPeopleTop);
+            while (result.next()) {
+                People people = new People();
+                people.setPersonLookup(result.getString("personLookup"));
+                people.setDisplayTitle(result.getString("displayTitle"));
+                people.setGender(result.getString("gender"));
+                people.setBirthPlace(result.getString("birthPlace"));
+                people.setDeathYear(result.getString("deathYear"));
+                people.setBirthYear(result.getString("birthYear"));
+                people.setDictText(result.getString("dictText"));
+                people.setVerses(result.getString("verses"));
+                people.setVerseCount(result.getString("verseCount"));
+
+                peoples.add(people);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return peoples;
     }
 }
