@@ -188,7 +188,7 @@
                   </GridPane>
                </children>
             </GridPane>
-            <TextArea fx:id="textAyat" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <TextArea fx:id="textAyat" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </center>

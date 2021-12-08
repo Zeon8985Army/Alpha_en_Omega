@@ -17,13 +17,22 @@ public class Database {
 
     final private String querySelect = "SELECT osisRef,verseID,book,chapter,verseNum,verseText,people,places FROM verses";
     final private String queryPeople = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses FROM people";
-    final private String queryPlace = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude FROM places";
-    // query baru
-    // ... sesuai pembagian WBS
+    final private String queryPlace = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude,verseCount FROM places";
+    // query baru - top verse people
+    final private String queryPeopleTop = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses,verseCount FROM people ORDER BY verseCount DESC LIMIT 7";
+    final private String queryLimitOffsetPeople = "SELECT personLookup,displayTitle,gender,birthYear,deathYear,birthPlace,dictText,verses,verseCount FROM people ORDER BY verseCount DESC LIMIT 7 OFFSET ";
+    // OFFSET dari baris... Limit sampai baris ke...
 
+    // query baru - top verse place
+    final private String queryPlaceTop = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude,verseCount FROM places ORDER BY verseCount DESC LIMIT 7";
+    final private String queryLimitOffsetPlace = "SELECT placeLookup,displayTitle,verses,dictText,peopleBorn,peopleDied,hasBeenHere,latitude,longitude,verseCount FROM places ORDER BY verseCount DESC LIMIT 7 OFFSET ";
+
+    // ... sesuai pembagian WBS
     private ObservableList<Verse> verses = FXCollections.observableArrayList();
     private ObservableList<People> peoples = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
+    private ObservableList<Places> viralSevenPlace = FXCollections.observableArrayList();
+    private ObservableList<People> viralSevenPeople = FXCollections.observableArrayList();
     // pembuatan list untuk menyimpan hasil query
 
     private Connection connection = null;
@@ -92,6 +101,7 @@ public class Database {
     }
 
     public ObservableList<Places> getAllPlace() {
+        places.clear();
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(queryPlace);
@@ -106,7 +116,8 @@ public class Database {
                 place.setHasBeenHere(result.getString("hasBeenHere"));
                 place.setLatitude(result.getString("latitude"));
                 place.setLongitude(result.getString("longitude"));
-
+                place.setVerseCount(result.getString("verseCount"));
+               
                 places.add(place);
             }
         } catch (Exception e) {
@@ -114,5 +125,84 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return places;
+    }
+
+    // top 7 verseCount People
+    public ObservableList<People> getAllPeopleSevenVerseCount() {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(queryPeopleTop);
+            while (result.next()) {
+                People people = new People();
+                people.setPersonLookup(result.getString("personLookup"));
+                people.setDisplayTitle(result.getString("displayTitle"));
+                people.setGender(result.getString("gender"));
+                people.setBirthPlace(result.getString("birthPlace"));
+                people.setDeathYear(result.getString("deathYear"));
+                people.setBirthYear(result.getString("birthYear"));
+                people.setDictText(result.getString("dictText"));
+                people.setVerses(result.getString("verses"));
+                people.setVerseCount(result.getString("verseCount"));
+
+                peoples.add(people);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return peoples;
+    }
+
+    // return top ... verse sesuai keinginan PEOPLE // rancangan
+    public ObservableList<People> getTopVerseDetail(String poss) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(queryLimitOffsetPeople + poss);
+            while (result.next()) {
+                People people = new People();
+                people.setPersonLookup(result.getString("personLookup"));
+                people.setDisplayTitle(result.getString("displayTitle"));
+                people.setGender(result.getString("gender"));
+                people.setBirthPlace(result.getString("birthPlace"));
+                people.setDeathYear(result.getString("deathYear"));
+                people.setBirthYear(result.getString("birthYear"));
+                people.setDictText(result.getString("dictText"));
+                people.setVerses(result.getString("verses"));
+                people.setVerseCount(result.getString("verseCount"));
+
+                peoples.add(people);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return peoples;
+    }
+
+    public ObservableList<Places> getTopSevenPlace() {
+        viralSevenPlace.clear();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(queryPlaceTop);
+            while (result.next()) {
+                Places place = new Places();
+                place.setPlaceLookup(result.getString("placeLookup"));
+                place.setDisplayTitle(result.getString("displayTitle"));
+                place.setVerses(result.getString("verses"));
+                place.setDictText(result.getString("dictText"));
+                place.setPeopleBorn(result.getString("peopleBorn"));
+                place.setPeopleDied(result.getString("peopleDied"));
+                place.setHasBeenHere(result.getString("hasBeenHere"));
+                place.setLatitude(result.getString("latitude"));
+                place.setLongitude(result.getString("longitude"));
+                place.setVerseCount(result.getString("verseCount"));
+
+                viralSevenPlace.add(place);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return viralSevenPlace;
     }
 }

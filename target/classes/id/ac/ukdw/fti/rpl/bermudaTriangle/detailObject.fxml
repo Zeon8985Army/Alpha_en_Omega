@@ -128,12 +128,18 @@
                   <RowConstraints maxHeight="13.0" minHeight="3.66668701171875" prefHeight="13.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <BarChart prefHeight="119.0" prefWidth="472.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <BarChart fx:id="barChart" prefHeight="119.0" prefWidth="472.0" title="Number of Verse" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis label="Object name" side="BOTTOM">
+                           <tickLabelFont>
+                              <Font name="System Bold" size="11.0" />
+                           </tickLabelFont></CategoryAxis>
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis label="Value" side="LEFT">
+                           <tickLabelFont>
+                              <Font name="System Bold" size="11.0" />
+                           </tickLabelFont></NumberAxis>
                     </yAxis>
                   </BarChart>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bar Chart" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -151,7 +157,7 @@
                       <RowConstraints maxHeight="21.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="feature" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="1">
