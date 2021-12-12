@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.People;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Places;
-
+import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Verse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -44,7 +46,13 @@ import id.ac.ukdw.fti.rpl.bermudaTriangle.javascript.object.MarkerOptions;
 public class FXML_Home_Controller implements Initializable, MapComponentInitializedListener {
     private ObservableList<People> peoples = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
+    private ObservableList<Verse> verses = FXCollections.observableArrayList();
 
+    // menampung 7 top verseCount di people
+    private ObservableList<People> listSevenPeople = FXCollections.observableArrayList();
+
+    // menampung 7 top verceCount di place
+    private ObservableList<Places> listSevenPlace = FXCollections.observableArrayList();
     @FXML
     private MenuBar menuBar;
 
@@ -73,74 +81,84 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
     private Button detailVerse;
     @FXML
     private Text backLog;
+    
+    @FXML
+    private TextArea feature;
+
+    // barchart
+    @FXML
+    private BarChart<String, Integer> barChart;
 
     // atribute non scene Builder
     private GoogleMap map;
-    private String nameObject="Bethlehem";
-    private String typeObject="place";
+    private String nameObject = "Bethlehem";
+    private String typeObject = "place";
 
     // untuk ke detail
     private Stage stage;
     private Scene scene;
     private Parent root;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapID.addMapInitializedListener(this);
+        
     }
 
     @Override
     public void mapInitialized() {
+        this.secondaryChart();
+        this.feature();
         description.setWrapText(true);
         places = Database.instance.getAllPlace();
         peoples = Database.instance.getAllPeople();
-        double latitude=0;
-        double longtitude=0;
+        double latitude = 0;
+        double longtitude = 0;
         ArrayList<String> listVerseInView = new ArrayList<>();
         System.out.println(typeObject.equals("place"));
 
         if (typeObject.equals("place")) {
-            // Database, getValue from Bethlehem    
-            String namePlace="No Object";
-            String peopleInHere="No Data";
-            String descriptionTextDict="No Data";
+            // Database, getValue from Bethlehem
+            String namePlace = "No Object";
+            String peopleInHere = "No Data";
+            String descriptionTextDict = "No Data";
 
             for (Places place : places) {
                 if (place.getDisplayTitle().equals(nameObject)) {
-                    if (place.getLatitude() != null && place.getLongitude()!= null) {
-                        latitude=Double.parseDouble(place.getLatitude());
-                        longtitude=Double.parseDouble(place.getLongitude());
+                    if (place.getLatitude() != null && place.getLongitude() != null) {
+                        latitude = Double.parseDouble(place.getLatitude());
+                        longtitude = Double.parseDouble(place.getLongitude());
                     }
-                    if (place.getDictText()!= null) {
-                        descriptionTextDict=place.getDictText();
+                    if (place.getDictText() != null) {
+                        descriptionTextDict = place.getDictText();
                     }
-                    namePlace=place.getDisplayTitle();
+                    namePlace = place.getDisplayTitle();
 
                     // People in hero (in string type)
-                    String[] listPeopleBornHere={""};
-                    String[] listPeopleDiedHere={""};
-                    String[] listPeopleHasBeenHere={""};
+                    String[] listPeopleBornHere = { "" };
+                    String[] listPeopleDiedHere = { "" };
+                    String[] listPeopleHasBeenHere = { "" };
 
                     if (place.getPeopleBorn() != null) {
-                        if (place.getPeopleBorn().contains(",")){
+                        if (place.getPeopleBorn().contains(",")) {
                             listPeopleBornHere = place.getPeopleBorn().split(",");
-                        }else{
+                        } else {
                             listPeopleBornHere = place.getPeopleBorn().split(" ");
                         }
-                    } 
+                    }
 
                     if (place.getPeopleDied() != null) {
-                        if (place.getPeopleDied().contains(",")){
+                        if (place.getPeopleDied().contains(",")) {
                             listPeopleDiedHere = place.getPeopleDied().split(",");
-                        }else{
+                        } else {
                             listPeopleDiedHere = place.getPeopleDied().split(" ");
                         }
                     }
 
                     if (place.getHasBeenHere() != null) {
-                        if (place.getHasBeenHere().contains(",")){
+                        if (place.getHasBeenHere().contains(",")) {
                             listPeopleHasBeenHere = place.getHasBeenHere().split(",");
-                        }else{
+                        } else {
                             listPeopleHasBeenHere = place.getHasBeenHere().split(" ");
                         }
                     }
@@ -150,21 +168,21 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     listPeopleHereLookup.addAll(Arrays.asList(listPeopleHasBeenHere));
 
                     StringBuilder sb = new StringBuilder();
-                    for (String name : listPeopleHereLookup){
+                    for (String name : listPeopleHereLookup) {
                         for (People people : peoples) {
-                            if (people.getPersonLookup().equals(name)){
+                            if (people.getPersonLookup().equals(name)) {
                                 sb.append(people.getDisplayTitle());
                                 break;
                             }
                         }
-                        if (name.equals("")){
+                        if (name.equals("")) {
                             break;
                         }
                         sb.append(",");
                     }
-                    peopleInHere=sb.toString();
+                    peopleInHere = sb.toString();
                     if (peopleInHere.equals("")) {
-                        peopleInHere="No Data";
+                        peopleInHere = "No Data";
                     }
 
                     // Verse
@@ -189,7 +207,6 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             // Map
             LatLong bethlehem = new LatLong(latitude, longtitude);
 
-            
             MapOptions mapOptions = new MapOptions();
             mapOptions.center(new LatLong(latitude, longtitude))
                     .mapType(MapTypeIdEnum.TERRAIN)
@@ -200,19 +217,19 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     .streetViewControl(false)
                     .zoomControl(false)
                     .zoom(12);
-            
+
             map = mapID.createMap(mapOptions);
 
-            //Add markers to the map
+            // Add markers to the map
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(bethlehem);
-            
+
             Marker bethlehemMarker = new Marker(markerOptions1);
-            
-            map.addMarker( bethlehemMarker );
-            
+
+            map.addMarker(bethlehemMarker);
+
             InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-            infoWindowOptions.content("<span>"+namePlace+"</span>");
+            infoWindowOptions.content("<span>" + namePlace + "</span>");
 
             InfoWindow bethlehemInfoWindow = new InfoWindow(infoWindowOptions);
             bethlehemInfoWindow.open(map, bethlehemMarker);
@@ -220,12 +237,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             // ObjectName
             objectName.setText(namePlace);
 
-            // Description 
-            description.setText(descriptionTextDict+"\n\n"+"People in here : "+peopleInHere);
+            // Description
+            description.setText(descriptionTextDict + "\n\n" + "People in here : " + peopleInHere);
 
             // Verse --ada pada bagian database
-        }else{
-            String descriptionTextDict="No Data";
+        } else {
+            String descriptionTextDict = "No Data";
             ArrayList<ArrayList<String>> listLatLongName = new ArrayList<>();
 
             // Object name
@@ -234,22 +251,22 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             // Database People
             for (People people : peoples) {
                 if (people.getDisplayTitle().equals(nameObject)) {
-                    if (people.getDictText()!=null) {
+                    if (people.getDictText() != null) {
                         descriptionTextDict = people.getDictText();
                     }
                     if (people.getGender() != null) {
                         descriptionTextDict = descriptionTextDict +
-                                "\n\nGender : "+(people.getGender());
-                    }else{
+                                "\n\nGender : " + (people.getGender());
+                    } else {
                         descriptionTextDict = descriptionTextDict +
-                                "\n\nGender : "+"No Data";
+                                "\n\nGender : " + "No Data";
                     }
                     if (people.getBirthYear() != null) {
                         descriptionTextDict = descriptionTextDict +
-                                "\n\nBirth Year : "+(people.getBirthYear());
-                    }else{
+                                "\n\nBirth Year : " + (people.getBirthYear());
+                    } else {
                         descriptionTextDict = descriptionTextDict +
-                                "\n\nBirth Year : "+"No Data";
+                                "\n\nBirth Year : " + "No Data";
                     }
 
                     // description
@@ -259,7 +276,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                         String[] listPeopleHassBenHere = { "" };
                         String[] listPeopleBornHere = { "" };
                         String[] listPeopleDiedHere = { "" };
-    
+
                         if (place.getHasBeenHere() != null) {
                             if (place.getHasBeenHere().contains(",")) {
                                 listPeopleHassBenHere = place.getHasBeenHere().split(",");
@@ -267,7 +284,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                                 listPeopleHassBenHere = place.getHasBeenHere().split(" ");
                             }
                         }
-    
+
                         if (place.getPeopleBorn() != null) {
                             if (place.getPeopleBorn().contains(",")) {
                                 listPeopleBornHere = place.getPeopleBorn().split(",");
@@ -275,7 +292,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                                 listPeopleBornHere = place.getPeopleBorn().split(" ");
                             }
                         }
-    
+
                         if (place.getPeopleDied() != null) {
                             if (place.getPeopleDied().contains(",")) {
                                 listPeopleDiedHere = place.getPeopleDied().split(",");
@@ -283,11 +300,11 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                                 listPeopleDiedHere = place.getPeopleDied().split(" ");
                             }
                         }
-    
+
                         ArrayList<String> listPeopleHere = new ArrayList<>(Arrays.asList(listPeopleHassBenHere));
                         listPeopleHere.addAll(Arrays.asList(listPeopleBornHere));
                         listPeopleHere.addAll(Arrays.asList(listPeopleDiedHere));
-                        
+
                         // MASIH TERDAPAT BUG MINOR, JIKA LOKASI ADA TAPI LANG LONG TIDA ADA
                         // MAAKA AKAN MEMBUAT PROSES SELANJUTNYA ERROR
                         // SLUSI SEMENTARA Descripsi dan penamaan objek diletakan di atas dari MAPPING
@@ -307,7 +324,6 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                         }
                     }
 
-    
                     if (people.getVerses() != null) {
                         if (people.getVerses().contains(",")) {
                             String[] listVerseTampung = people.getVerses().split(",");
@@ -333,6 +349,28 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             ArrayList<InfoWindow> infoWindowArr = new ArrayList<>();
             Integer lenghtPlace = listLatLongName.size();
 
+            // Multiple Marked position
+            for (ArrayList<String> ArrayDetail : listLatLongName) {
+                latitude = Double.parseDouble(ArrayDetail.get(0));
+                longtitude = Double.parseDouble(ArrayDetail.get(1));
+
+                latLongArr.add(new LatLong(latitude, longtitude));
+
+            }
+
+            Integer pointer = 0;
+            for (LatLong arrOjb : latLongArr) {
+                String namePlace = listLatLongName.get(pointer).get(2);
+                // name Place
+
+                // Add markers to the map
+                MarkerOptions markerOptions1 = new MarkerOptions();
+                markerOptions1.position(arrOjb).label(namePlace);
+
+                markerArr.add(new Marker(markerOptions1));
+                pointer = pointer + 1;
+            }
+
             MapOptions mapOptions = new MapOptions();
             mapOptions.center(new LatLong(latitude, longtitude))
                     .mapType(MapTypeIdEnum.TERRAIN)
@@ -343,48 +381,30 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     .streetViewControl(false)
                     .zoomControl(false)
                     .zoom(5);
+
             map = mapID.createMap(mapOptions);
 
-            // Multiple Marked position
-            for (ArrayList<String> ArrayDetail : listLatLongName) {
-                latitude=Double.parseDouble(ArrayDetail.get(0));
-                longtitude=Double.parseDouble(ArrayDetail.get(1));
-
-                latLongArr.add(new LatLong(latitude,longtitude));
-                
-            }
-
-            Integer pointer =0;
-            for ( LatLong arrOjb : latLongArr) {
-                String namePlace = listLatLongName.get(pointer).get(2);
-                // name Place
-
-                //Add markers to the map
-                MarkerOptions markerOptions1 = new MarkerOptions();
-                markerOptions1.position(arrOjb).label(namePlace);
-
-                markerArr.add(new Marker(markerOptions1));
-                pointer = pointer+1;
-            }
-
-            Integer pointer2 =0;
+            Integer pointer2 = 0;
             for (Marker marker : markerArr) {
                 map.addMarker(marker);
 
-                if (pointer2 == lenghtPlace-1) {
+                if (pointer2 == lenghtPlace - 1) {
                     InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
                     String namePlace = listLatLongName.get(pointer2).get(2);
 
-                    infoWindowOptions.content("<span>"+namePlace+"</span>");
-                    InfoWindow window = new InfoWindow(infoWindowOptions);
-                    window.open(map, marker);    
+                    // ada label putih besar
+                    // infoWindowOptions.content("<span>" + namePlace + "</span>");
+                    // InfoWindow window = new InfoWindow(infoWindowOptions);
+
+                    InfoWindow window = new InfoWindow();
+                    window.open(map);
+                    break;
                 }
 
-                pointer2 = pointer2+1;
+                pointer2 = pointer2 + 1;
             }
 
-            
-        }    
+        }
     }
 
     // MenuBar Method
@@ -403,13 +423,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         app_stage.setHeight(bounds.getHeight());
         app_stage.show();
     }
-        
 
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-        
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
@@ -420,6 +439,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         app_stage.setHeight(bounds.getHeight());
         app_stage.show();
     }
+
     @FXML
     void checkSlider(MouseEvent event) {
         description.setStyle("-fx-font-size: " + slidder.getValue());
@@ -428,10 +448,13 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
     }
 
     @FXML
-    void showVerse(ActionEvent event) throws IOException{
+    void showVerse(ActionEvent event) throws IOException {
         String selectedVerse = listVerse.getSelectionModel().getSelectedItem();
 
-        if (selectedVerse!=null) {
+        if (selectedVerse != null) {
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("verseWindow.fxml"));
             root = loader.load();
 
@@ -442,8 +465,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
             stage.show();
-        }else{
+        } else {
             backLog.setText("Please Select verse before go to detail verse...");
         }
     }
@@ -452,8 +479,55 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         nameObject = nameObjSearch;
         typeObject = typeObjectPara;
 
-        System.out.println(nameObject);
-        System.out.println(typeObject);
+    }
 
+    public void secondaryChart() {
+        places = Database.instance.getAllPlace();
+        peoples = Database.instance.getAllPeople();
+        listSevenPlace = Database.instance.getTopSevenPlace();
+ 
+        XYChart.Series series1=new XYChart.Series();
+        XYChart.Series series2=new XYChart.Series();
+
+        series1.setName("Teratas");
+        series2.setName("Pilihan Sekarang");
+    
+
+        for (Places topPlaces : listSevenPlace){
+            if (topPlaces.getVerseCount()!=null){
+                series1.getData().add(new XYChart.Data(topPlaces.getDisplayTitle(), Integer.parseInt(topPlaces.getVerseCount())));
+            }
+        }
+        for(Places listTempat : places){
+            if (listTempat.getDisplayTitle().equals(nameObject)){
+                series2.getData().add(new XYChart.Data(listTempat.getDisplayTitle(), Integer.parseInt(listTempat.getVerseCount())));
+                break;
+            }
+        }
+     
+        barChart.getData().addAll(series1);
+        barChart.getData().addAll(series2);
+    
+     }
+    public void feature() {
+        feature.clear();
+        listSevenPlace = Database.instance.getTopSevenPlace();
+        feature.setText("The number of details of each object in the barchart can be seen here:\n");
+      
+        System.out.println(nameObject);
+        for (Places tempatViral : listSevenPlace) {
+            if(tempatViral.getVerseCount() != null){
+                feature.appendText(tempatViral.getDisplayTitle()+ ":"+ " "+ tempatViral.getVerseCount()  + "\n" );
+            } 
+        }    
+        
+        
+        for (Places listTempat : places){
+            if(listTempat.getDisplayTitle().equals(nameObject) && listTempat.getVerseCount()!=null){
+                feature.appendText(listTempat.getDisplayTitle()+ ":"+ " "+ listTempat.getVerseCount()  + "\n");
+                 break;
+            }
+        }   
     }
 }
+
