@@ -120,7 +120,7 @@ public class FXML_Search_Controller implements Initializable {
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
 
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
@@ -135,7 +135,7 @@ public class FXML_Search_Controller implements Initializable {
     @FXML
     void goToDashboard(ActionEvent event) throws IOException{
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
         
         Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
         Scene searchPage = new Scene(searchWindow);
