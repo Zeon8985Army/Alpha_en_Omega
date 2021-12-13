@@ -11,6 +11,9 @@ import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Verse;
@@ -41,7 +44,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class FXML_VerseWindow_Controller extends TimerTask implements Initializable {
+public class FXML_VerseWindow_Controller implements Initializable,Runnable {
     private ObservableList<Verse> verses = FXCollections.observableArrayList();
     private ArrayList<String> listKitabArrayAll = new ArrayList<>();
 
@@ -95,22 +98,28 @@ public class FXML_VerseWindow_Controller extends TimerTask implements Initializa
 
     @FXML
     void goToSearch(ActionEvent event) throws IOException {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("searchWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
+        app_stage.setX(bounds.getMinX());
+        app_stage.setY(bounds.getMinY());
+        app_stage.setWidth(bounds.getWidth());
+        app_stage.setHeight(bounds.getHeight());
         app_stage.show();
     }
 
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
 
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
-        app_stage.setScene(searchPage);
         app_stage.setScene(searchPage);
         app_stage.setX(bounds.getMinX());
         app_stage.setY(bounds.getMinY());
@@ -122,7 +131,7 @@ public class FXML_VerseWindow_Controller extends TimerTask implements Initializa
     @FXML
     void goToDashboard(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
 
         Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
         Scene searchPage = new Scene(searchWindow);
@@ -165,8 +174,17 @@ public class FXML_VerseWindow_Controller extends TimerTask implements Initializa
         }
 
         // check Internet dinamic gagal
-        // Timer timer = new Timer(true);
-        // timer.schedule(new FXML_VerseWindow_Controller(), 0, 1000);
+        // try {
+        //     Timer timer = new Timer(true);
+        //     timer.schedule(new FXML_VerseWindow_Controller(), 0, 1000);
+        // } catch (Exception e) {
+        //     System.out.println("Error ketangkap");
+        // }
+
+       
+        // ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        // executor.scheduleAtFixedRate(new FXML_VerseWindow_Controller(), 0, 3, TimeUnit.SECONDS);
+        
     }
 
     // Method untuk select"
@@ -380,15 +398,18 @@ public class FXML_VerseWindow_Controller extends TimerTask implements Initializa
     // looping method untuk pengecekan internet dengan timer yang ada di Main gagal
     @Override
     public void run() {
-        // System.out.println(checkInternet());
-        // // TODO Auto-generated method stub
-        // if (!checkInternet()) {
-        // onlineMethod();
-        // }else{
-        // System.out.println("Test 2");
-        // offlineMethod();
-        // }
+        System.out.println(checkInternet());
+        // TODO Auto-generated method stub
+        if (!checkInternet()) {
+            // onlineMethod();
+            System.out.println("Test 2");
+        }else{
+            labelInternetStatus.setText("⚫ Online");
+            System.out.println("Test Online");
+            // offlineMethod();
+        }
     }
+
 
     private void onlineMethod() {
         labelInternetStatus.setText("⚫ Online");
