@@ -2,11 +2,13 @@
 .my-button {
     -fx-background-color: rgb(185, 185, 185);
 }
+
 .detail-button {
     -fx-background-color: rgb(201, 201, 121);
 }
+
 .search-bar {
     -fx-border-radius: 5px;
     -fx-border-color: black;
-  
+
 }

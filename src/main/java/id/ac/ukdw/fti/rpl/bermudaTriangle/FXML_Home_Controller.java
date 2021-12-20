@@ -106,13 +106,6 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
     @FXML
     private TextArea feature;
 
-    // barchart
-    @FXML
-    private BarChart<String, Integer> barChart;
-    @FXML
-    private ComboBox<String> topVerseCount;
-    @FXML
-    private TextArea feature;
 
     // atribute non scene Builder
     private GoogleMap map;
