@@ -55,8 +55,8 @@ public class FXML_Search_Controller implements Initializable {
     private Parent root;
 
     // untuk fullscrenn
-    Dimension size= Toolkit.getDefaultToolkit().getScreenSize();
-    
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+
     @FXML
     private AnchorPane searchAnchor;
 

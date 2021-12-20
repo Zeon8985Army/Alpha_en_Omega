@@ -20,7 +20,7 @@
    <top>
       <BorderPane prefHeight="53.0" prefWidth="601.0" BorderPane.alignment="CENTER">
          <top>
-            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <MenuBar fx:id="menuBar" stylesheets="@html/anchorDetail.css" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="🏠">
                   <items>
@@ -39,7 +39,7 @@
                 </Menu>
                   <Menu mnemonicParsing="false" text="?">
                     <items>
-                      <MenuItem fx:id="BtnAboutUs" mnemonicParsing="false" onAction="#goToAboutUs" text="About Us" />
+                      <MenuItem mnemonicParsing="false" text="About - Not Ready" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false">
@@ -60,27 +60,24 @@
          <bottom>
             <BorderPane prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <top>
-                  <AnchorPane prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="28.0" prefWidth="600.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
                </top>
                <left>
-                  <AnchorPane prefHeight="35.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="35.0" prefWidth="45.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
                </left>
                <center>
                   <BorderPane prefHeight="15.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <right>
-                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="46.0" stylesheets="@html/anchorDetail.css" text="🔍" BorderPane.alignment="CENTER">
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="46.0" styleClass="search-button" stylesheets="@html/searchwindow.css" text="🔍" textFill="#161616" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
                      </right>
                      <center>
-                        <BorderPane prefHeight="28.0" prefWidth="285.0" BorderPane.alignment="CENTER">
-                           <right>
-                              <AnchorPane prefHeight="35.0" prefWidth="29.0" BorderPane.alignment="CENTER" />
-                           </right>
+                        <BorderPane prefHeight="28.0" prefWidth="285.0" stylesheets="@../../../../../CSS/anchorDetail.css" BorderPane.alignment="CENTER">
                            <center>
-                              <TextField fx:id="searchInput" onKeyPressed="#enterSearh" prefHeight="37.0" prefWidth="148.0" promptText="People or Place" BorderPane.alignment="CENTER">
+                              <TextField fx:id="searchInput" onKeyPressed="#enterSearh" prefHeight="37.0" prefWidth="148.0" promptText="People or Place" style=": ;" styleClass="search-bar" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="Yu Gothic Regular" size="15.0" />
                                  </font>
@@ -93,7 +90,7 @@
                <right>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </right>
@@ -104,9 +101,9 @@
    <center>
       <BorderPane prefHeight="334.0" prefWidth="703.0" BorderPane.alignment="CENTER">
          <top>
-            <BorderPane prefHeight="59.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="59.0" prefWidth="703.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER">
                <left>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List People :" BorderPane.alignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Helvetica;" text="List People :" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="-30.0" left="50.0" />
                      </BorderPane.margin>
@@ -116,7 +113,7 @@
                   </Text>
                </left>
                <center>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List Places :" BorderPane.alignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Helvetica;" text="List Places :" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="Yu Gothic Regular" size="15.0" />
                      </font>
@@ -127,13 +124,13 @@
                </center></BorderPane>
          </top>
          <left>
-            <AnchorPane prefHeight="278.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="278.0" prefWidth="44.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <AnchorPane prefHeight="289.0" prefWidth="39.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="289.0" prefWidth="39.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="303.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="24.0" />
@@ -143,12 +140,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ListView fx:id="tableSearchPeople" onMouseClicked="#clickItemPeople" prefHeight="200.0" prefWidth="200.0">
+                  <ListView fx:id="tableSearchPeople" onMouseClicked="#clickItemPeople" prefHeight="200.0" prefWidth="200.0" stylesheets="@html/searchwindow.css">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </ListView>
-                  <ListView fx:id="tableSearchPlaces" onMouseClicked="#clickItemPlaces" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                  <ListView fx:id="tableSearchPlaces" onMouseClicked="#clickItemPlaces" prefHeight="200.0" prefWidth="200.0" stylesheets="@html/searchwindow.css" GridPane.columnIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -161,21 +158,21 @@
    <bottom>
       <BorderPane prefHeight="68.0" prefWidth="703.0" BorderPane.alignment="CENTER">
          <left>
-            <AnchorPane prefHeight="56.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="56.0" prefWidth="44.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <AnchorPane prefHeight="56.0" prefWidth="40.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="56.0" prefWidth="40.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </right>
          <top>
-            <AnchorPane prefHeight="13.0" prefWidth="703.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="13.0" prefWidth="703.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </top>
          <bottom>
-            <AnchorPane prefHeight="14.0" prefWidth="703.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="14.0" prefWidth="703.0" styleClass="background" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <BorderPane prefHeight="55.0" prefWidth="619.0" styleClass="my-button" stylesheets="@../../../../../../CSS/anchorDetail.css" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="55.0" prefWidth="619.0" style="-fx-background-radius: 5px;" styleClass="background-detail" stylesheets="@html/searchwindow.css" BorderPane.alignment="CENTER">
                <right>
-                  <Button fx:id="detailItem" mnemonicParsing="false" onAction="#detailItem" text="Detail" BorderPane.alignment="CENTER">
+                  <Button fx:id="detailItem" mnemonicParsing="false" onAction="#detailItem" styleClass="detail-button" stylesheets="@html/searchwindow.css" text="Detail" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets right="10.0" />
                      </BorderPane.margin>

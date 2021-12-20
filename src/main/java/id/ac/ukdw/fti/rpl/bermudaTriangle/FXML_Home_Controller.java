@@ -106,6 +106,14 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
     @FXML
     private TextArea feature;
 
+    // barchart
+    @FXML
+    private BarChart<String, Integer> barChart;
+    @FXML
+    private ComboBox<String> topVerseCount;
+    @FXML
+    private TextArea feature;
+
     // atribute non scene Builder
     private GoogleMap map;
     private String nameObject = "Bethlehem";
@@ -215,7 +223,6 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     if (peopleInHere.substring(peopleInHere.length()-1).equals(",")) {
                         peopleInHere = peopleInHere.substring(0, peopleInHere.length()-1);
                     }
-
                     if (peopleInHere.equals("")) {
                         peopleInHere = "No Data";
                     }

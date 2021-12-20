@@ -42,7 +42,6 @@ public class App extends Application {
             stage.setMaximized(false);
             stage.show();
         }
-
         
     }
 
