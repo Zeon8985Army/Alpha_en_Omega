@@ -39,7 +39,7 @@
                 </Menu>
                   <Menu mnemonicParsing="false" text="?">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="About - Not Ready" />
+                      <MenuItem fx:id="BtnAboutUs" mnemonicParsing="false" onAction="#goToAboutUs" text="About Us" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false">
@@ -68,7 +68,7 @@
                <center>
                   <BorderPane prefHeight="15.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <right>
-                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="46.0" text="🔍" BorderPane.alignment="CENTER">
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="31.0" prefWidth="46.0" stylesheets="@html/anchorDetail.css" text="🔍" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>

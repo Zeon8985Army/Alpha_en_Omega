@@ -45,7 +45,7 @@
                 </Menu>
                   <Menu mnemonicParsing="false" text="?">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="About - Not Ready" />
+                      <MenuItem fx:id="BtnAboutUs" mnemonicParsing="false" onAction="#goToAboutUs" text="About Us" />
                     </items>
                   </Menu>
                   <Menu fx:id="internetStatus" mnemonicParsing="false">
@@ -188,7 +188,7 @@
                   </GridPane>
                </children>
             </GridPane>
-            <TextArea fx:id="textAyat" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+            <TextArea fx:id="textAyat" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </center>
