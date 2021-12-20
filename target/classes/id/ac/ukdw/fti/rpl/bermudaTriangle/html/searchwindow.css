@@ -1,0 +1,70 @@
+.background {
+    -fx-background-color:rgb(85, 83, 83);
+}
+
+.background-detail {
+    -fx-background-color:rgb(16, 47, 116);
+}
+
+.detail-button {
+    -fx-background-color: rgb(238, 232, 232);
+    -fx-background-radius: 5px;
+    -fx-border-color:rgba(196, 193, 193, 0.4);
+    -fx-border-radius: 5px;
+    -fx-font-family: sans-serif;
+    -fx-color: white;
+}
+
+.search-bar {
+    -fx-background-color: white;
+    -fx-font-family: sans-serif;
+    -fx-border-style: solid;
+    -fx-border-color:  rgb(185, 185, 185);
+    -fx-border-radius: 5px 0px 0px 5px;
+    -fx-background-radius: 5px;
+}
+
+.search-button {
+    -fx-background-color: rgba(66, 94, 172, 0.5);
+    -fx-background-radius: 0px 5px 5px 0px;
+    -fx-border-color:rgba(134, 132, 132, 0.4);
+    -fx-border-radius: 0px 5px 5px 0px;
+}
+.background{
+    -fx-background-color: rgb(255, 255, 255);
+}
+.list-people{
+    -fx-background-image:url("orang\(1\).png");
+    -fx-background-size: 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom right;
+}
+.list-people .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.list-people .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-people .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.list-places{
+    -fx-background-image:url("tempat\(1\).png");
+    -fx-background-size: 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom right;
+}
+.list-places .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.list-places .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-places .scroll-pane .content {
+    -fx-background-color: transparent;
+}

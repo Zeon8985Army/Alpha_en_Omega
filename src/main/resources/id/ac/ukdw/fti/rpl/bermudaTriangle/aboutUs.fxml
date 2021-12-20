@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <?import com.lynden.gmapsfx.GoogleMapView?> -->
+<!-- <?import id.ac.ukdw.fti.rpl.bermudaTriangle.GoogleMapView?> -->
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="467.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.bermudaTriangle.FXML_aboutUs_Controller">
+   <top>
+      <BorderPane prefHeight="24.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+         <center>
+            <MenuBar fx:id="menuBar" stylesheets="@html/anchorDetail.css" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="🏠">
+                  <items>
+                    <MenuItem fx:id="dashboard" mnemonicParsing="false" onAction="#goToDashboard" text="Dashboard" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="🔍">
+                  <items>
+                    <MenuItem fx:id="BtnGoToSearch" mnemonicParsing="false" onAction="#goToSearch" text="Search" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="📖">
+                  <items>
+                    <MenuItem fx:id="Verse" mnemonicParsing="false" onAction="#goToVerse" text="Verse" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="?">
+                    <items>
+                      <MenuItem fx:id="BtnAboutUs" disable="true" mnemonicParsing="false" onAction="#goToAboutUs" text="About Us" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <Label text="⚫ Online" textFill="#009a08">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </graphic>
+                  </Menu>
+              </menus>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </MenuBar>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="334.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+         <top>
+            <BorderPane prefHeight="54.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Text fx:id="objectName" strokeType="OUTSIDE" strokeWidth="0.0" text="About us" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="30.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font name="Yu Gothic Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </left>
+               <bottom>
+                  <BorderPane prefHeight="3.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <Separator prefHeight="0.0" prefWidth="703.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
+               </bottom>
+               <right>
+                  <GridPane prefHeight="44.0" prefWidth="261.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="81.0" minWidth="10.0" prefWidth="41.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="47.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Slider fx:id="slidder" max="25.0" min="12.0" onMouseDragged="#checkSlider" GridPane.columnIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="50%">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="100%" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+               </right>
+            </BorderPane>
+         </top>
+         <center>
+            <GridPane prefHeight="354.0" prefWidth="703.0" styleClass="text-box" stylesheets="@html/aboutus.css" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="49.0" minWidth="0.0" prefWidth="49.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="581.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="61.0" minWidth="10.0" prefWidth="61.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="2.0" minHeight="0.0" prefHeight="2.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextArea fx:id="textAboutUs" editable="false" prefHeight="339.0" prefWidth="593.0" stylesheets="@html/aboutus.css" text="Alpha en Omega is dekstop aplication that can show information about Bible. The information will present in various forms, ex : barchart, map, and text. There are also several features that allow you to search for verses using this application. This application is also made to be used by people who have difficulty seeing small text sizes, because In this application there is a feature to set the text size.&#10;&#10;&#10;This app was developed by bermuda triangle team consisting of :&#10;  1. Bastian Surya Hartono&#10;  2. Ryan Sulistiawan Haryanto&#10;  3. Lukas Kurniawan" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="text-box" />
+                        <String fx:value="gambar1" />
+                     </styleClass>
+                  </TextArea>
+                  <GridPane stylesheets="@html/aboutus.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,41 @@
+.chapter-button{
+    -fx-background-radius:5px;
+    -fx-font-family:sans-serif;
+}
+.background-kiri{
+    -fx-background-color: rgb(255, 255, 255);
+    
+}
+
+.text-font{
+    -fx-font-family: sans-serif;
+}
+.background-atas{
+    -fx-background-color: rgb(255, 255, 255);
+}
+.border-zoom{
+
+}
+.background-isi{
+        -fx-background-color: rgb(255, 255, 255);
+        -fx-background-image: url("download-removebg-preview.png");
+        -fx-background-size: 1350px;
+        -fx-border-style: solid;
+        -fx-border-color: grey;
+        -fx-border-width: 0.3px;
+}
+
+.logo{
+    -fx-color: blue;
+}
+.background-isi .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.background-isi .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.background-isi .scroll-pane .content {
+    -fx-background-color: transparent;
+}

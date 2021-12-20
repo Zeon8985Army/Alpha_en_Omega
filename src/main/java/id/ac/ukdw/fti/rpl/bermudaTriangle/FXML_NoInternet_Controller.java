@@ -19,9 +19,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
-public class FXML_NoInternet_Controller implements Initializable{
+// untuk fullscrenn
+import java.awt.*;
 
-    
+public class FXML_NoInternet_Controller implements Initializable {
+
+    // untuk fullscrenn
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+
     @FXML
     private MenuBar menuBar;
 
@@ -41,17 +46,18 @@ public class FXML_NoInternet_Controller implements Initializable{
     void goToOfflineMode(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-        
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
         app_stage.setX(bounds.getMinX());
         app_stage.setY(bounds.getMinY());
-        app_stage.setWidth(bounds.getWidth());
-        app_stage.setHeight(bounds.getHeight());
+        app_stage.setWidth(size.getWidth());
+        app_stage.setHeight(size.getHeight());
         app_stage.show();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }

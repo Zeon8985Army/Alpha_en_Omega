@@ -1,0 +1,9 @@
+
+.chapter-button{
+    -fx-background-radius:5em;
+    -fx-font-family:sans-serif;
+}
+
+.background-kiri {
+    -fx-background-color: rgb(238, 238, 215);
+}
