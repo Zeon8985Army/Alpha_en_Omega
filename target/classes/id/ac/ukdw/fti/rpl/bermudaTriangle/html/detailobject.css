@@ -1,0 +1,35 @@
+.border-verse{
+    -fx-border-style: solid;
+    -fx-border-color: rgba(161, 154, 154, 0.4);
+    -fx-border-radius: 5px 5px 0px 0px;
+    -fx-background-radius: 5px 5px 0px 0px;
+}
+.background-utama{
+    -fx-background-color: rgb(255, 255, 255);
+}
+
+.detail-button{
+    -fx-font-family: sans-serif;
+    -fx-background-color: rgba(66, 94, 172, 0.5);
+    -fx-border-radius: 0px 0px 5px 5px;
+    -fx-background-radius: 0px 0px 5px 5px;
+}
+.description-box{
+    -fx-border-width: 0.4px;
+    -fx-border-color: rgba(161, 154, 154, 0.4);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.chart-box{
+    -fx-border-width: 0.4px;
+    -fx-border-color: rgba(161, 154, 154, 0.4);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.map-box{
+    -fx-background-radius: 5px;
+}
+.top-button{
+    -fx-background-color: rgba(66, 94, 172, 0.5);
+    -fx-background-radius: 5px;
+}

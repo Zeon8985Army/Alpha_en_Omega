@@ -10,6 +10,9 @@ public class People {
     private String dictText;
     private String verses;
     
+    // Atribut untuk count ayat
+    private String verseCount;
+
     public String getPersonLookup() {
         return personLookup;
     }
@@ -59,5 +62,11 @@ public class People {
         this.verses = verses;
     }
     
-    
+    public String getVerseCount() {
+        return verseCount;
+    }
+
+    public void setVerseCount(String verseCount) {
+        this.verseCount = verseCount;
+    }
 }

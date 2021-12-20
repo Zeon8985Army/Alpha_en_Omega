@@ -36,6 +36,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+// untuk fullscrenn
+import java.awt.*;
+
 public class FXML_Search_Controller implements Initializable {
     // Menyimpan hasil query di database.java
     private ObservableList<People> peoples = FXCollections.observableArrayList();
@@ -51,6 +54,9 @@ public class FXML_Search_Controller implements Initializable {
     private Scene scene;
     private Parent root;
 
+    // untuk fullscrenn
+    Dimension size= Toolkit.getDefaultToolkit().getScreenSize();
+    
     @FXML
     private AnchorPane searchAnchor;
 
@@ -117,10 +123,11 @@ public class FXML_Search_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.show();
     }
+
     @FXML
     void goToVerse(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
 
         Parent searchWindow = FXMLLoader.load(getClass().getResource("verseWindow.fxml"));
         Scene searchPage = new Scene(searchWindow);
@@ -128,23 +135,24 @@ public class FXML_Search_Controller implements Initializable {
         app_stage.setScene(searchPage);
         app_stage.setX(bounds.getMinX());
         app_stage.setY(bounds.getMinY());
-        app_stage.setWidth(bounds.getWidth());
-        app_stage.setHeight(bounds.getHeight());
+        app_stage.setWidth(size.getWidth());
+        app_stage.setHeight(size.getHeight());
         app_stage.show();
     }
+
     @FXML
-    void goToDashboard(ActionEvent event) throws IOException{
+    void goToDashboard(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        
+        Rectangle2D bounds = screen.getPrimary().getBounds();
+
         Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
         Scene searchPage = new Scene(searchWindow);
         Stage app_stage = (Stage) menuBar.getScene().getWindow();
         app_stage.setScene(searchPage);
         app_stage.setX(bounds.getMinX());
         app_stage.setY(bounds.getMinY());
-        app_stage.setWidth(bounds.getWidth());
-        app_stage.setHeight(bounds.getHeight());
+        app_stage.setWidth(size.getWidth());
+        app_stage.setHeight(size.getHeight());
         app_stage.show();
     }
 
@@ -189,28 +197,41 @@ public class FXML_Search_Controller implements Initializable {
         String namePeople = tableSearchPeople.getSelectionModel().getSelectedItem();
         String namePlace = tableSearchPlaces.getSelectionModel().getSelectedItem();
 
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getPrimary().getBounds();
+
         if (namePeople != null || namePlace != null) {
             if (peopleList.contains(namePeople)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
                 FXML_Home_Controller detailObject = loader.getController();
-                detailObject.showDetail(namePeople,"people");
+                detailObject.showDetail(namePeople, "people");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(size.getWidth());
+                stage.setHeight(size.getHeight());
+
                 stage.show();
             } else if (placesList.contains(namePlace)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
                 root = loader.load();
 
                 FXML_Home_Controller detailObject = loader.getController();
-                detailObject.showDetail(namePlace,"place");
+                detailObject.showDetail(namePlace, "place");
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
+
                 stage.setScene(scene);
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(size.getWidth());
+                stage.setHeight(size.getHeight());
                 stage.show();
             }
         } else {
