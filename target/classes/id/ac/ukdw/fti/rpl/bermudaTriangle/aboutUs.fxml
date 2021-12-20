@@ -3,7 +3,7 @@
 <!-- <?import com.lynden.gmapsfx.GoogleMapView?> -->
 <!-- <?import id.ac.ukdw.fti.rpl.bermudaTriangle.GoogleMapView?> -->
 
-
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -23,7 +23,7 @@
    <top>
       <BorderPane prefHeight="24.0" prefWidth="703.0" BorderPane.alignment="CENTER">
          <center>
-            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <MenuBar fx:id="menuBar" stylesheets="@html/anchorDetail.css" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="🏠">
                   <items>
@@ -107,7 +107,7 @@
             </BorderPane>
          </top>
          <center>
-            <GridPane prefHeight="354.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+            <GridPane prefHeight="354.0" prefWidth="703.0" styleClass="text-box" stylesheets="@html/aboutus.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="49.0" minWidth="0.0" prefWidth="49.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="581.0" />
@@ -116,15 +116,30 @@
               <rowConstraints>
                 <RowConstraints maxHeight="2.0" minHeight="0.0" prefHeight="2.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="347.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextArea fx:id="textAboutUs" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="text-area" stylesheets="@html/anchorDetail.css" text="Alpha en Omega is dekstop aplication that can show information about Bible. The information will present in various forms, ex : barchart, map, and text. There are also several features that allow you to search for verses using this application. This application is also made to be used by people who have difficulty seeing small text sizes, because In this application there is a feature to set the text size.&#10;&#10;&#10;This app was developed by bermuda triangle team consisting of :&#10;  1. Bastian Surya Hartono&#10;  2. Ryan Sulistiawan Haryanto&#10;  3. Lukas Kurniawan" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextArea fx:id="textAboutUs" editable="false" prefHeight="339.0" prefWidth="593.0" stylesheets="@html/aboutus.css" text="Alpha en Omega is dekstop aplication that can show information about Bible. The information will present in various forms, ex : barchart, map, and text. There are also several features that allow you to search for verses using this application. This application is also made to be used by people who have difficulty seeing small text sizes, because In this application there is a feature to set the text size.&#10;&#10;&#10;This app was developed by bermuda triangle team consisting of :&#10;  1. Bastian Surya Hartono&#10;  2. Ryan Sulistiawan Haryanto&#10;  3. Lukas Kurniawan" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="text-box" />
+                        <String fx:value="gambar1" />
+                     </styleClass>
                   </TextArea>
+                  <GridPane stylesheets="@html/aboutus.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
                </children>
             </GridPane>
          </center>
