@@ -14,6 +14,7 @@ import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.scene.Node;
 
 import id.ac.ukdw.fti.rpl.bermudaTriangle.database.Database;
 import id.ac.ukdw.fti.rpl.bermudaTriangle.modal.Verse;
@@ -103,6 +104,15 @@ public class FXML_VerseWindow_Controller implements Initializable, Runnable {
     // untuk fullscrenn
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
+    // untuk menyimpan lokasi sebelumnya jika ada
+    String nameObject="";
+    String typeObject="";
+
+    // untuk ke detail
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     @FXML
     void goToSearch(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
@@ -140,15 +150,53 @@ public class FXML_VerseWindow_Controller implements Initializable, Runnable {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getPrimary().getBounds();
 
-        Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
-        Scene searchPage = new Scene(searchWindow);
-        Stage app_stage = (Stage) menuBar.getScene().getWindow();
-        app_stage.setScene(searchPage);
-        app_stage.setX(bounds.getMinX());
-        app_stage.setY(bounds.getMinY());
-        app_stage.setWidth(size.getWidth());
-        app_stage.setHeight(size.getHeight());
-        app_stage.show();
+
+        if (!nameObject.equals("") || !typeObject.equals("")) {
+            if (typeObject.equals("people")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
+                root = loader.load();
+
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(nameObject, "people");
+
+                stage = (Stage) menuBar.getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(size.getWidth());
+                stage.setHeight(size.getHeight());
+
+                stage.show();
+            } else if (typeObject.equals("place")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("detailObject.fxml"));
+                root = loader.load();
+
+                FXML_Home_Controller detailObject = loader.getController();
+                detailObject.showDetail(nameObject, "place");
+
+                stage = (Stage) menuBar.getScene().getWindow();
+                scene = new Scene(root);
+
+                stage.setScene(scene);
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(size.getWidth());
+                stage.setHeight(size.getHeight());
+                stage.show();
+            }
+        }else{
+            Parent searchWindow = FXMLLoader.load(getClass().getResource("detailObject.fxml"));
+            Scene searchPage = new Scene(searchWindow);
+            Stage app_stage = (Stage) menuBar.getScene().getWindow();
+            app_stage.setScene(searchPage);
+            app_stage.setX(bounds.getMinX());
+            app_stage.setY(bounds.getMinY());
+            app_stage.setWidth(size.getWidth());
+            app_stage.setHeight(size.getHeight());
+            app_stage.show();
+        }
+        
     }
     @FXML
     void goToAboutUs(ActionEvent event) throws IOException{
@@ -360,7 +408,11 @@ public class FXML_VerseWindow_Controller implements Initializable, Runnable {
         ayatLengkap.setStyle("-fx-font-size: " + slidder.getValue());
     }
 
-    public void showDetailVerse(String ayat) {
+    public void showDetailVerse(String ayat,String namaObjekPara, String typeObjekPara) {
+        // pemberian nilai nama objek yang lama dan tipenya
+        nameObject = namaObjekPara;
+        typeObject = typeObjekPara;
+
         String[] arrayArat = ayat.split("\\.");
         listKitab.getSelectionModel().select(arrayArat[0]);
 
@@ -421,7 +473,6 @@ public class FXML_VerseWindow_Controller implements Initializable, Runnable {
     // looping method untuk pengecekan internet dengan timer yang ada di Main gagal
     @Override
     public void run() {
-        System.out.println(checkInternet());
         // TODO Auto-generated method stub
         if (!checkInternet()) {
             // onlineMethod();

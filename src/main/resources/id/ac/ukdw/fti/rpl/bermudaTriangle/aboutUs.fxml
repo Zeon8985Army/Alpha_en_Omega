@@ -47,7 +47,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false">
                      <graphic>
-                        <Label text="⚫ Online" textFill="#009a08">
+                        <Label fx:id="statusOnline" text="⚫ Online" textFill="#009a08">
                            <font>
                               <Font name="Yu Gothic Bold" size="12.0" />
                            </font>

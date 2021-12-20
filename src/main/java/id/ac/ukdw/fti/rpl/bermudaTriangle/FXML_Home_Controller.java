@@ -106,7 +106,6 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
     @FXML
     private TextArea feature;
 
-
     // atribute non scene Builder
     private GoogleMap map;
     private String nameObject = "Bethlehem";
@@ -199,7 +198,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     for (String name : listPeopleHereLookup) {
                         for (People people : peoples) {
                             if (people.getPersonLookup().equals(name)) {
-                                if (sb.indexOf(people.getDisplayTitle())==-1){
+                                if (sb.indexOf(people.getDisplayTitle()) == -1) {
                                     sb.append(people.getDisplayTitle());
                                     sb.append(",");
                                 }
@@ -209,12 +208,12 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                         if (name.equals("")) {
                             break;
                         }
-                        
+
                     }
-    
+
                     peopleInHere = sb.toString();
-                    if (peopleInHere.substring(peopleInHere.length()-1).equals(",")) {
-                        peopleInHere = peopleInHere.substring(0, peopleInHere.length()-1);
+                    if (peopleInHere.substring(peopleInHere.length() - 1).equals(",")) {
+                        peopleInHere = peopleInHere.substring(0, peopleInHere.length() - 1);
                     }
                     if (peopleInHere.equals("")) {
                         peopleInHere = "No Data";
@@ -584,7 +583,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                     .zoom(12)
                     .minZoom(2);
             map = mapID.createMap(mapOptions);
-            
+
             // Add markers to the map
             MarkerOptions markerOptions1 = new MarkerOptions();
             markerOptions1.position(bethlehem);
@@ -834,8 +833,9 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
 
         app_stage.show();
     }
+
     @FXML
-    void goToAboutUs(ActionEvent event) throws IOException{
+    void goToAboutUs(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getPrimary().getBounds();
 
@@ -849,7 +849,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         app_stage.setHeight(size.getHeight());
         app_stage.show();
     }
-    
+
     @FXML
     void checkSlider(MouseEvent event) {
         description.setStyle("-fx-font-size: " + slidder.getValue());
@@ -870,7 +870,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
 
             FXML_VerseWindow_Controller verseWindow = loader.getController();
 
-            verseWindow.showDetailVerse(selectedVerse);
+            verseWindow.showDetailVerse(selectedVerse, nameObject, typeObject);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -1060,7 +1060,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
         feature.clear();
         feature.setText("The number of details for each object in the barchart can be seen here:\n");
 
-        System.out.println(nameObject);
+        // System.out.println(nameObject);
 
         if (typeObject.equals("place")) {
             Boolean statusObjekSekarangAdaDiTop7 = false;
@@ -1071,7 +1071,7 @@ public class FXML_Home_Controller implements Initializable, MapComponentInitiali
                 // atribut penampung 7 nilai tertinggi verse
                 listSevenPlace = Database.instance.getTopSevenPlace();
             }
-            System.out.println("terdeteksi tempat");
+            // System.out.println("terdeteksi tempat");
             for (Places tempatViral : listSevenPlace) {
                 if (tempatViral.getVerseCount() != null) {
                     feature.appendText(tempatViral.getDisplayTitle() + ":" + " " + tempatViral.getVerseCount() + "\n");

@@ -1,7 +1,9 @@
 package id.ac.ukdw.fti.rpl.bermudaTriangle;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
@@ -27,8 +30,8 @@ import javafx.stage.Stage;
 // untuk fullscrenn
 import java.awt.*;
 
-public class FXML_aboutUs_Controller implements Initializable{
-    
+public class FXML_aboutUs_Controller implements Initializable {
+
     @FXML
     private MenuBar menuBar;
     @FXML
@@ -39,13 +42,14 @@ public class FXML_aboutUs_Controller implements Initializable{
     private MenuItem Verse;
     @FXML
     private MenuItem BtnAboutUs;
-
+    @FXML
+    private Label statusOnline;
     @FXML
     private Text objectName;
 
     @FXML
     private Slider slidder;
-    
+
     @FXML
     private TextArea textAboutUs;
 
@@ -53,7 +57,7 @@ public class FXML_aboutUs_Controller implements Initializable{
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     @FXML
-    void goToAboutUs(ActionEvent event) throws IOException{
+    void goToAboutUs(ActionEvent event) throws IOException {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getPrimary().getBounds();
 
@@ -118,11 +122,41 @@ public class FXML_aboutUs_Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        if (checkInternet()) {
+            BtnGoToSearch.setDisable(false);
+            dashboard.setDisable(false);
+            onlineMethod();
+        } else {
+            BtnGoToSearch.setDisable(true);
+            dashboard.setDisable(true);
+            offlineMethod();
+        }
     }
 
     @FXML
     void checkSlider(MouseEvent event) {
         textAboutUs.setStyle("-fx-font-size: " + slidder.getValue());
     }
-}   
+
+    public static boolean checkInternet() {
+        try {
+            URL url = new URL("http://www.google.com");
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    private void onlineMethod() {
+        statusOnline.setText("⚫ Online");
+        statusOnline.setStyle("-fx-text-fill: green;");
+    }
+
+    private void offlineMethod() {
+        statusOnline.setText("⚫ Offline");
+        statusOnline.setStyle("-fx-text-fill: red;");
+    }
+}

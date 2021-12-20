@@ -23,7 +23,7 @@
    <top>
       <BorderPane prefHeight="24.0" prefWidth="703.0" BorderPane.alignment="CENTER">
          <center>
-            <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <MenuBar fx:id="menuBar" stylesheets="@html/anchorDetail.css" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="🏠">
                   <items>
@@ -42,7 +42,7 @@
                 </Menu>
                   <Menu mnemonicParsing="false" text="?">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="About - Not Ready" />
+                      <MenuItem mnemonicParsing="false" text="About Us" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false">
@@ -153,7 +153,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnToOffline" mnemonicParsing="false" onAction="#goToOfflineMode" prefHeight="25.0" prefWidth="102.0" text="Offline Mode" GridPane.columnIndex="1">
+                                    <Button fx:id="btnToOffline" mnemonicParsing="false" onAction="#goToOfflineMode" prefHeight="25.0" prefWidth="102.0" stylesheets="@html/searchwindow.css" text="Offline Mode" textAlignment="CENTER" GridPane.columnIndex="1">
                                        <font>
                                           <Font name="Yu Gothic Regular" size="14.0" />
                                        </font>
