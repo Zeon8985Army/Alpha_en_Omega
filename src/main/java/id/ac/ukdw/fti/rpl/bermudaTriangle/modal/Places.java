@@ -11,6 +11,9 @@ public class Places {
     private String latitude;
     private String longitude;
 
+    // atribut untuk count ayat
+    private String verseCount;
+
     public String getPlaceLookup() {
         return placeLookup;
     }
@@ -83,4 +86,11 @@ public class Places {
         this.longitude = longitude;
     }
 
+    public String getVerseCount() {
+        return verseCount;
+    }
+
+    public void setVerseCount(String verseCount) {
+        this.verseCount = verseCount;
+    }
 }

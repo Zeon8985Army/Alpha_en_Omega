@@ -12,3 +12,8 @@
     -fx-border-color: black;
 
 }
+
+.menu-bar {
+    -fx-background-color: rgba(66, 94, 172, 0.5);
+    -fx-color: white;
+}
